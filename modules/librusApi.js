@@ -40,6 +40,20 @@ class Librus {
             });
         }).catch(console.error);
     }
+
+    getAttendances() {
+        let caller = this.caller;
+        return caller.get(config.urls.attendances).then((response) => {
+            const data = JSON.stringify(response.data);
+            fs.writeFile(config.tempPath + "/data.json", data, (err) => {
+                if (err) {
+                    console.error('Błąd podczas zapisywania pliku:', err);
+                } else {
+                    console.log('Strona została zapisana do pliku znajdującego się w folderze ' + config.tempPath);
+                }
+            });
+        }).catch(console.error);
+    }
 }
 
 module.exports = Librus;
