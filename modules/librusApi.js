@@ -45,13 +45,39 @@ class Librus {
         let caller = this.caller;
         return caller.get(config.urls.attendances).then((response) => {
             const data = JSON.stringify(response.data);
-            fs.writeFile(config.tempPath + "/data.json", data, (err) => {
+            fs.writeFile(config.dataFilePath, data, (err) => {
                 if (err) {
                     console.error('Błąd podczas zapisywania pliku:', err);
                 } else {
                     console.log('Strona została zapisana do pliku znajdującego się w folderze ' + config.tempPath);
                 }
             });
+        }).catch(console.error);
+    }
+
+    getLessonStatisticsData(lessonStatisticsId) {
+        let caller = this.caller;
+        return caller.get(config.urls.lessonStatistics + lessonStatisticsId)
+            .then((response) => {
+                let lessonStatisticsData = response.data;
+                return lessonStatisticsData;
+            }).catch(console.error);
+    }
+
+    getLessonData(lessonId) {
+        let caller = this.caller;
+        return caller.get(config.urls.lessons + lessonId).then((response) => {
+            let lessonData = response.data
+            return lessonData;
+        }).catch(console.error);
+    }
+
+    getSubjectData(subjectId) {
+        let caller = this.caller;
+
+        return caller.get(config.urls.subjects + subjectId).then((response) => {
+            let subjectData = response.data;
+            return subjectData;
         }).catch(console.error);
     }
 }

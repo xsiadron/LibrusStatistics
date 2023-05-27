@@ -9,8 +9,12 @@ config.urls = {
     "authorization2FA": "https://api.librus.pl/OAuth/Authorization/2FA?client_id=46",
     "attendances": "https://synergia.librus.pl/gateway/api/2.0/Attendances/",
     "attendancesTypes": "https://synergia.librus.pl/gateway/api/2.0/Attendances/Types",
+    "subjects": "https://synergia.librus.pl/gateway/api/2.0/Subjects/",
+    "lessons": "https://synergia.librus.pl/gateway/api/2.0/Lessons/",
+    "lessonStatistics": "https://synergia.librus.pl/gateway/api/2.0/Attendances/LessonsStatistics/", // + id
 }
 
 config.tempPath = path.join(__dirname, '../temp');
+config.dataFilePath = config.tempPath + "/data.json"
 
 module.exports = config;

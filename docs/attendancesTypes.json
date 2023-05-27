@@ -1,0 +1,94 @@
+{
+    "Types": [
+        {
+            "Id": 1,
+            "Name": "Nieobecno\u015b\u0107",
+            "Short": "nb",
+            "Standard": true,
+            "ColorRGB": "F7F8AA",
+            "IsPresenceKind": false,
+            "Order": 3,
+            "Identifier": "LID-ATTENDANCES-TYPE-ZACY7IIMFO8MQR6ET7R8"
+        },
+        {
+            "Id": 2,
+            "Name": "Sp\u00f3\u017anienie",
+            "Short": "sp",
+            "Standard": true,
+            "ColorRGB": "D2B48C",
+            "IsPresenceKind": true,
+            "Order": 2,
+            "Identifier": "LID-ATTENDANCES-TYPE-LZRKIKSQ6HCTK7EOLRZ5"
+        },
+        {
+            "Id": 3,
+            "Name": "Nieobecno\u015b\u0107 uspr.",
+            "Short": "u",
+            "Standard": true,
+            "ColorRGB": "AAF888",
+            "IsPresenceKind": false,
+            "Order": 4,
+            "Identifier": "LID-ATTENDANCES-TYPE-3ZIZBIW37WKSOMTAIQCF"
+        },
+        {
+            "Id": 4,
+            "Name": "Zwolnienie",
+            "Short": "zw",
+            "Standard": true,
+            "ColorRGB": "A0A0A0",
+            "IsPresenceKind": true,
+            "Order": 5,
+            "Identifier": "LID-ATTENDANCES-TYPE-VK38688MHMXZZUUSV4C4"
+        },
+        {
+            "Id": 100,
+            "Name": "Obecno\u015b\u0107",
+            "Short": "ob",
+            "Standard": true,
+            "ColorRGB": "C6E0FF",
+            "IsPresenceKind": true,
+            "Order": 1,
+            "Identifier": "LID-ATTENDANCES-TYPE-IAKWOFMRWXOALDUF3YLZ"
+        },
+        {
+            "Id": 2928,
+            "Identifier": "LID-ATTENDANCES-TYPE-3829-4PQT6GE3XUS7AKWHPHBE",
+            "Name": "nieobecno\u015b\u0107 online",
+            "Short": "of",
+            "Standard": false,
+            "StandardType": {
+                "Id": 1,
+                "Url": "https:\/\/api.librus.pl\/2.0\/Attendances\/Types\/1"
+            },
+            "Color": {
+                "Id": 26,
+                "Url": "https:\/\/api.librus.pl\/2.0\/Colors\/26"
+            },
+            "IsPresenceKind": false,
+            "Order": 7
+        },
+        {
+            "Id": 2930,
+            "Identifier": "LID-ATTENDANCES-TYPE-3829-3AGLY84I4UPHODSVFSHC",
+            "Name": "obecno\u015b\u0107 online",
+            "Short": "on",
+            "Standard": false,
+            "StandardType": {
+                "Id": 100,
+                "Url": "https:\/\/api.librus.pl\/2.0\/Attendances\/Types\/100"
+            },
+            "Color": {
+                "Id": 18,
+                "Url": "https:\/\/api.librus.pl\/2.0\/Colors\/18"
+            },
+            "IsPresenceKind": true,
+            "Order": 6
+        }
+    ],
+    "Resources": {
+        "..": {
+            "Url": "https:\/\/api.librus.pl\/2.0\/Attendances"
+        }
+    },
+    "Url": "https:\/\/api.librus.pl\/2.0\/Attendances\/Types"
+}
