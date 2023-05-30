@@ -11,7 +11,6 @@ config.urls = {
     "attendancesTypes": "https://synergia.librus.pl/gateway/api/2.0/Attendances/Types",
     "subjects": "https://synergia.librus.pl/gateway/api/2.0/Subjects/",
     "lessons": "https://synergia.librus.pl/gateway/api/2.0/Lessons/",
-    "lessonStatistics": "https://synergia.librus.pl/gateway/api/2.0/Attendances/LessonsStatistics/", // + id
 }
 
 config.tempPath = path.join(__dirname, '../temp');

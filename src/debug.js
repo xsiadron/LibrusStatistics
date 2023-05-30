@@ -1,5 +1,8 @@
-const Librus = require("../modules/librusApi.js");
-const DataConverter = require("../modules/dataConventer.js");
+const LibrusApi = require("../modules/librusApi.js");
+const LibrusStatisticsApi = require("../modules/librusStatisticsApi.js");
+
+const librusApi = new LibrusApi();
+const librusStatisticsApi = new LibrusStatisticsApi();
 
 const readline = require('readline').createInterface({
     input: process.stdin,
@@ -8,18 +11,21 @@ const readline = require('readline').createInterface({
 
 readline.question(`Enter Email: `, login => {
     readline.question(`Enter Password: `, password => {
-        const librus = new Librus();
-        const dataConverter = new DataConverter();
-
-        librus.authorize(login, password)
-            .then(() => {
-                return librus.getAttendances();
-            }).then((attendances) => {
-                setTimeout(() => {
-                    return dataConverter.getListOfSubjects(librus);
-                  }, 3000);
-            }).catch(console.error);
-
+        fetchData(login, password);
         readline.close();
     });
 });
+
+async function fetchData(login, password) {
+    try {
+        const authorized = await librusApi.authorize(login, password);
+        if (authorized) {
+            const attendances = await librusApi.getAttendances();
+            await librusStatisticsApi.saveData(attendances);
+
+            await librusStatisticsApi.getListOfSubjects(librusApi);
+        } else throw console.error;
+    } catch (error) {
+        console.error(error);
+    }
+}

@@ -6,7 +6,7 @@ const { CookieJar } = require('tough-cookie');
 
 const config = require('../config/librus-config.js');
 
-class Librus {
+class LibrusApi {
     constructor(cookies) {
         this.cookie = new CookieJar();
 
@@ -25,61 +25,54 @@ class Librus {
     }
 
     authorize(login, password) {
-        let caller = this.caller;
-        return caller.get(config.urls.login).then(() => {
-            return caller.postForm(config.urls.authorization,
-                {
-                    action: "login",
-                    login: login,
-                    pass: password,
-                }
-            );
-        }).then(() => {
-            return caller.get(config.urls.authorization2FA).then(() => {
-                return this.cookie.getCookies(config.urls.home);
-            });
-        }).catch(console.error);
+        return new Promise((resolve) => {
+            let caller = this.caller;
+            caller.get(config.urls.login).then(() => {
+                return caller.postForm(config.urls.authorization,
+                    {
+                        action: "login",
+                        login: login,
+                        pass: password,
+                    }
+                );
+            }).then(() => {
+                caller.get(config.urls.authorization2FA).then(() => {
+                    resolve(true);
+                });
+            }).catch(console.error);
+        });
     }
 
     getAttendances() {
-        let caller = this.caller;
-        return caller.get(config.urls.attendances).then((response) => {
-            const data = JSON.stringify(response.data);
-            fs.writeFile(config.dataFilePath, data, (err) => {
-                if (err) {
-                    console.error('Błąd podczas zapisywania pliku:', err);
-                } else {
-                    console.log('Strona została zapisana do pliku znajdującego się w folderze ' + config.tempPath);
-                }
-            });
-        }).catch(console.error);
-    }
-
-    getLessonStatisticsData(lessonStatisticsId) {
-        let caller = this.caller;
-        return caller.get(config.urls.lessonStatistics + lessonStatisticsId)
-            .then((response) => {
-                let lessonStatisticsData = response.data;
-                return lessonStatisticsData;
-            }).catch(console.error);
+        return new Promise((resolve) => {
+            let caller = this.caller;
+            caller.get(config.urls.attendances)
+                .then((response) => {
+                    let attendancesData = response.data;
+                    resolve(attendancesData);
+                }).catch(console.error);
+        });
     }
 
     getLessonData(lessonId) {
-        let caller = this.caller;
-        return caller.get(config.urls.lessons + lessonId).then((response) => {
-            let lessonData = response.data
-            return lessonData;
-        }).catch(console.error);
+        return new Promise((resolve) => {
+            let caller = this.caller;
+            caller.get(config.urls.lessons + lessonId).then((response) => {
+                let lessonData = response.data
+                resolve(lessonData);
+            }).catch(console.error);
+        });
     }
 
     getSubjectData(subjectId) {
-        let caller = this.caller;
-
-        return caller.get(config.urls.subjects + subjectId).then((response) => {
-            let subjectData = response.data;
-            return subjectData;
-        }).catch(console.error);
+        return new Promise((resolve) => {
+            let caller = this.caller;
+            caller.get(config.urls.subjects + subjectId).then((response) => {
+                let subjectData = response.data;
+                resolve(subjectData);
+            }).catch(console.error);
+        });
     }
 }
 
-module.exports = Librus;
+module.exports = LibrusApi;
