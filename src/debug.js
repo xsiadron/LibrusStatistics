@@ -2,7 +2,7 @@ const LibrusApi = require("../modules/librusApi.js");
 const LibrusStatisticsApi = require("../modules/librusStatisticsApi.js");
 
 const librusApi = new LibrusApi();
-const librusStatisticsApi = new LibrusStatisticsApi();
+const librusStatisticsApi = new LibrusStatisticsApi(librusApi);
 
 const readline = require('readline').createInterface({
     input: process.stdin,
