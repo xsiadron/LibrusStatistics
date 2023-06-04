@@ -95,7 +95,8 @@ class DataConverter {
             i++;
         }
 
-        return attendancesData;
+        let jsonString = JSON.stringify(attendancesData);
+        return JSON.parse(jsonString);
     }
 
     async getLibrusStatisticsData() {
