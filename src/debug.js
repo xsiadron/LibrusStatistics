@@ -23,7 +23,8 @@ async function fetchData(login, password) {
             const attendances = await librusApi.getAttendances();
             await librusStatisticsApi.saveData(attendances);
 
-            await librusStatisticsApi.getListOfSubjects(librusApi);
+            let librusStatisticsData = await librusStatisticsApi.getLibrusStatisticsData(librusApi);
+            await librusStatisticsApi.saveData(librusStatisticsData);
         } else throw console.error;
     } catch (error) {
         console.error(error);
