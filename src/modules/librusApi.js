@@ -1,10 +1,8 @@
-const cheerio = require('cheerio');
-const axios = require('axios');
-const fs = require('fs');
-const { wrapper } = require('axios-cookiejar-support');
-const { CookieJar } = require('tough-cookie');
+import axios from "axios";
+import { wrapper } from 'axios-cookiejar-support';
+import { CookieJar } from 'tough-cookie';
 
-const config = require('../config/librus-config.js');
+const { default: config } = require('../config/librus-config');
 
 class LibrusApi {
     constructor(cookies) {
@@ -75,4 +73,4 @@ class LibrusApi {
     }
 }
 
-module.exports = LibrusApi;
+export default LibrusApi;

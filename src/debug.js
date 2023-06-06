@@ -1,6 +1,7 @@
 const { sum } = require("lodash");
-const LibrusApi = require("../modules/librusApi.js");
-const LibrusStatisticsApi = require("../modules/librusStatisticsApi.js");
+const LibrusApi = require("./modules/librusApi");
+const LibrusStatisticsApi = require("./modules/librusStatisticsApi");
+const fs = require("fs")
 
 const librusApi = new LibrusApi();
 const librusStatisticsApi = new LibrusStatisticsApi(librusApi);

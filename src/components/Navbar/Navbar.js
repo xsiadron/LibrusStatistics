@@ -1,4 +1,4 @@
-import Navbar from './styles/Navbar.css';
+import './Navbar.css';
 
 export default function navbar() {
     return <nav className="nav">

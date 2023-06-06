@@ -1,15 +1,19 @@
 import './styles/App.css';
-import Navbar from './Navbar';
+import './styles/Colors.css';
+import Navbar from './components/Navbar/Navbar';
+import Home from './Home';
+import Login from './Login';
+import { Route, Routes } from "react-router-dom"
 
 function App() {
   return (
     <div className="app">
-      {/* 1. Nav */}
-      <Navbar />
+        < Navbar />
 
-      {/* 2. Subnav */}
-
-      {/* 3. List of subjects */}
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/logowanie' element={<Login/>}/>
+        </Routes>
 
     </div>
   );
