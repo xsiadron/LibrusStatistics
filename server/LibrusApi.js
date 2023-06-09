@@ -1,11 +1,11 @@
-import axios from "axios";
-import { wrapper } from 'axios-cookiejar-support';
-import { CookieJar } from 'tough-cookie';
+const axios = require("axios");
+const { wrapper } = require('axios-cookiejar-support');
+const { CookieJar } = require('tough-cookie');
 
-const { default: config } = require('../config/librus-config');
+const config = require('./librus-config');
 
 class LibrusApi {
-    constructor(cookies) {
+    constructor() {
         this.cookie = new CookieJar();
 
         this.cookie.setCookie("TestCookie=1;", config.urls.home);
@@ -73,4 +73,4 @@ class LibrusApi {
     }
 }
 
-export default LibrusApi;
+module.exports = LibrusApi;

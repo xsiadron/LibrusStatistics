@@ -24,4 +24,4 @@ config.attendaceTypes = {
   2930: "Obecność online",
 };
 
-export default config;
+module.exports = config;
