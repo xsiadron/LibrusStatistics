@@ -1,4 +1,4 @@
-const LibrusApi = require("./librusApi");
+const LibrusApi = require("./LibrusApi");
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -19,20 +19,11 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.post('/pobieranie', async function (req, res) {
+app.post('/', async function (req, res) {
     const { login, password } = req.body;
-    let attendances = await fetchAttendances(login, password);
-    res.send(attendances);
+    let data = await downloadData(login, password);
+    res.send(data);
 });
-
-async function fetchAttendances(login, password) {
-    try {
-        let attendances = await downloadData(login, password);
-        return attendances;
-    } catch (error) {
-        return false
-    }
-}
 
 async function downloadData(login, password) {
     let librusApi = new LibrusApi();
@@ -40,7 +31,10 @@ async function downloadData(login, password) {
         const authorized = await librusApi.authorize(login, password);
         if (authorized) {
             const attendances = await librusApi.getAttendances();
-            return attendances;
+            const lessons = await librusApi.getLessons();
+            const subjects = await librusApi.getSubjects();
+
+            return { attendancesData: attendances, lessonsData: lessons, subjectsData: subjects };
         } else throw console.error;
     } catch (error) {
         return false;

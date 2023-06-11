@@ -1,12 +1,21 @@
+import { Route, Routes } from "react-router-dom"
+import { useState, useContext } from "react"
 import './styles/App.css';
 import './styles/Colors.css';
 import Navbar from './components/Navbar/Navbar';
 import Home from './Home';
 import Login from './Login';
-import { Route, Routes, Navigate } from "react-router-dom"
-import { useState, createContext, useContext } from "react"
-
 import { AuthContext } from "./AuthContext";
+
+const ClearLocalStorage = () => {
+	const data = localStorage.getItem("data");
+	if (data) {
+		const expireDate = JSON.parse(data)["expireDate"];
+		if (expireDate <= Date.now()) {
+			localStorage.removeItem("data");
+		}
+	}
+};
 
 const PrivateRoute = ({ element, path }) => {
 	const { isLogged } = useContext(AuthContext);
@@ -20,6 +29,8 @@ const PrivateRoute = ({ element, path }) => {
 
 function App() {
 	const [isLogged, setIsLogged] = useState(false);
+
+	ClearLocalStorage();
 
 	return (
 		<div className="app">
