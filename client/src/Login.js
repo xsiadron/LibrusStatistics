@@ -12,7 +12,7 @@ const Login = (() => {
     const navigate = useNavigate();
     const librusStatisticsApi = new LibrusStatisticsApi();
 
-    const { setIsLogged } = useContext(AuthContext);
+    const { isLogged, setIsLogged } = useContext(AuthContext);
 
     function Loguj(e) {
         e.preventDefault();
@@ -29,7 +29,7 @@ const Login = (() => {
                     if (responseData) {
                         const data = await librusStatisticsApi.convertData(responseData);
                         
-                        const minutesToExpire = 5;
+                        const minutesToExpire = 1;
                         localStorage.setItem('data', JSON.stringify({ data: data, expireDate: Date.now() + minutesToExpire * 60 * 1000 }));
 
                         setIsLogged(data ? true : false);
@@ -45,8 +45,6 @@ const Login = (() => {
                 });
         });
     }
-
-
 
     return (
         <section className="login">

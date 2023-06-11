@@ -11,6 +11,7 @@ const ClearLocalStorage = () => {
 	const data = localStorage.getItem("data");
 	if (data) {
 		const expireDate = JSON.parse(data)["expireDate"];
+
 		if (expireDate <= Date.now()) {
 			localStorage.removeItem("data");
 		}
@@ -18,7 +19,10 @@ const ClearLocalStorage = () => {
 };
 
 const PrivateRoute = ({ element, path }) => {
-	const { isLogged } = useContext(AuthContext);
+	const data = localStorage.getItem("data");
+	const { isLogged, setIsLogged } = useContext(AuthContext);
+	
+	if (!isLogged) setIsLogged(data ? true : false);
 
 	return isLogged ? (
 		<Home />
