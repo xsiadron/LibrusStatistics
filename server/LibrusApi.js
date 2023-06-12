@@ -2,7 +2,7 @@ const axios = require("axios");
 const { wrapper } = require('axios-cookiejar-support');
 const { CookieJar } = require('tough-cookie');
 
-const config = require('../client/src/config/librus-config');
+const config = require('./config');
 
 class LibrusApi {
     constructor() {
@@ -68,6 +68,26 @@ class LibrusApi {
             caller.get(config.urls.subjects).then((response) => {
                 let subjectData = response.data;
                 resolve(subjectData);
+            }).catch(console.error);
+        });
+    }
+
+    getGrades() {
+        return new Promise((resolve) => {
+            let caller = this.caller;
+            caller.get(config.urls.grades).then((response) => {
+                let gradesData = response.data;
+                resolve(gradesData);
+            }).catch(console.error);
+        });
+    }
+
+    getGradesCategories() {
+        return new Promise((resolve) => {
+            let caller = this.caller;
+            caller.get(config.urls.gradesCategories).then((response) => {
+                let gradesCategoriesData = response.data;
+                resolve(gradesCategoriesData);
             }).catch(console.error);
         });
     }

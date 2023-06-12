@@ -19,10 +19,10 @@ const ClearLocalStorage = () => {
 };
 
 const PrivateRoute = ({ element, path }) => {
-	const data = localStorage.getItem("data");
+	const data = JSON.parse(localStorage.getItem("data"));
 	const { isLogged, setIsLogged } = useContext(AuthContext);
 	
-	if (!isLogged) setIsLogged(data ? true : false);
+	if (!isLogged && data && data["data"]) setIsLogged(data ? true : false);
 
 	return isLogged ? (
 		<Home />

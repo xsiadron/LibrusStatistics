@@ -27,9 +27,10 @@ const Login = (() => {
                 .then(async (response) => {
                     const responseData = response.data;
                     if (responseData) {
+                        console.log(responseData);
                         const data = await librusStatisticsApi.convertData(responseData);
                         
-                        const minutesToExpire = 1;
+                        const minutesToExpire = 5;
                         localStorage.setItem('data', JSON.stringify({ data: data, expireDate: Date.now() + minutesToExpire * 60 * 1000 }));
 
                         setIsLogged(data ? true : false);
