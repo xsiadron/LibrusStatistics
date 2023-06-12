@@ -86,17 +86,29 @@ class LibrusStatisticsApi {
 
     async getGradeData(data, gradeData) {
         const lessonId = gradeData.Lesson.Id;
-        const lessonName = await this.getLessonName(lessonId, data);
+        const categoryId = gradeData.Category.Id;
+        const gradeId = gradeData.Id;
 
+        const lessonName = await this.getLessonName(lessonId, data);
         const grade = gradeData.Grade;
         const date = gradeData.Date;
         const semester = gradeData.Semester;
-
         const isConstituent = gradeData.IsConstituent;
         const isFinal = gradeData.IsFinal;
         const isFinalProposition = gradeData.IsFinalProposition;
         const isSemester = gradeData.IsSemester;
         const isSemesterProposition = gradeData.IsSemesterProposition;
+
+        const categoryData = data.gradesCategoriesData.Categories.find(item => item.Id === categoryId);
+
+        const categoryName = categoryData.Name;
+        const gradeCountToTheAverage = categoryData.CountToTheAverage;
+        const gradeWeight = categoryData.Weight;
+
+        const gradeCommentData = data.gradesCommentsData.Comments.find(item => item.Grade.Id === gradeId);
+
+        let gradeComment = "Brak";
+        if (gradeCommentData) gradeComment = gradeCommentData.Text;
 
         return {
             Name: lessonName,
@@ -108,6 +120,10 @@ class LibrusStatisticsApi {
             IsFinalProposition: isFinalProposition,
             IsSemester: isSemester,
             IsSemesterProposition: isSemesterProposition,
+            CategoryName: categoryName,
+            GradeCountToTheAverage: gradeCountToTheAverage,
+            GradeWeight: gradeWeight,
+            GradeComment: gradeComment
         };
     }
 
@@ -131,15 +147,7 @@ class LibrusStatisticsApi {
             gradesData = this.prepareGradesData(gradesData, gradeData.Name, gradeData.Semester);
 
             gradesData.Grades[gradeData.Name][gradeData.Semester][i] = {
-                Name: gradeData.Name,
-                Grade: gradeData.Grade,
-                Date: gradeData.Date,
-                Semester: gradeData.Semester,
-                IsConstituent: gradeData.IsConstituent,
-                IsFinal: gradeData.IsFinal,
-                IsFinalProposition: gradeData.IsFinalProposition,
-                IsSemester: gradeData.IsSemester,
-                IsSemesterProposition: gradeData.IsSemesterProposition,
+                ...gradeData
             };
             i++;
         }
@@ -151,7 +159,8 @@ class LibrusStatisticsApi {
         try {
             let attendancesData = await this.getAttendancesData(data);
             let gradesData = await this.getGradesData(data);
-            let librusStatisticsData = {...attendancesData, ...gradesData};
+
+            const librusStatisticsData = { ...attendancesData, ...gradesData };
             return librusStatisticsData;
         } catch (error) {
             return false;

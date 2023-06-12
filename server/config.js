@@ -11,6 +11,7 @@ config.urls = {
   lessons: "https://synergia.librus.pl/gateway/api/2.0/Lessons/",
   grades: "https://synergia.librus.pl/gateway/api/2.0/Grades/",
   gradesCategories: "https://synergia.librus.pl/gateway/api/2.0/Grades/Categories",
+  gradesComments: "https://synergia.librus.pl/gateway/api/2.0/Grades/Comments",
 };
 
 module.exports = config;

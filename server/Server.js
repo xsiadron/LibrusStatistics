@@ -25,8 +25,8 @@ app.post('/', async function (req, res) {
     const { login, password } = req.body;
     let data = await downloadData(login, password);
 
-    let secondsTaken = Math.round((Date.now() - initialTime)/1000).toFixed(2) ;
-    console.log("Request done in "+ secondsTaken + " seconds");
+    let secondsTaken = Math.round((Date.now() - initialTime) / 1000).toFixed(2);
+    console.log("Request done in " + secondsTaken + " seconds");
     res.send(data);
 });
 
@@ -40,8 +40,9 @@ async function downloadData(login, password) {
             const subjects = await librusApi.getSubjects();
             const grades = await librusApi.getGrades();
             const gradesCategories = await librusApi.getGradesCategories();
+            const gradesComments = await librusApi.getGradesComments();
 
-            return { attendancesData: attendances, lessonsData: lessons, subjectsData: subjects, gradesData: grades, gradesCategoriesData: gradesCategories };
+            return { attendancesData: attendances, lessonsData: lessons, subjectsData: subjects, gradesData: grades, gradesCategoriesData: gradesCategories, gradesCommentsData: gradesComments };
         } else throw console.error;
     } catch (error) {
         return false;

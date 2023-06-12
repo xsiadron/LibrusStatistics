@@ -91,6 +91,16 @@ class LibrusApi {
             }).catch(console.error);
         });
     }
+
+    getGradesComments() {
+        return new Promise((resolve) => {
+            let caller = this.caller;
+            caller.get(config.urls.gradesComments).then((response) => {
+                let gradesCommentsData = response.data;
+                resolve(gradesCommentsData);
+            }).catch(console.error);
+        });
+    }
 }
 
 module.exports = LibrusApi;
