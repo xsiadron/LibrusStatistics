@@ -6,6 +6,8 @@ import "./styles/Login.css"
 import { AuthContext } from "./AuthContext";
 import LibrusStatisticsApi from "./modules/LibrusStatisticsApi"
 
+import config from "./config/librus-config"
+
 const Login = (() => {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
@@ -19,26 +21,25 @@ const Login = (() => {
         return new Promise(async (resolve) => {
             let caller = wrapper(axios.create());
 
-            caller
-                .post("http://localhost:4000/", {
-                    login: login,
-                    password: password,
-                })
-                .then(async (response) => {
-                    const responseData = response.data;
-                    if (responseData) {
-                        const data = await librusStatisticsApi.convertData(responseData);
+            caller.post(`${config.serverHostname}:${config.serverPort}/`, {
+                login: login,
+                password: password,
+            }).then(async (response) => {
+                const responseData = response.data;
+                if (responseData) {
+                    const data = await librusStatisticsApi.convertData(responseData);
+                    const canBeLogged = data ? true : false;
 
-                        const minutesToExpire = 5;
-                        localStorage.setItem('data', JSON.stringify({ data: data, expireDate: Date.now() + minutesToExpire * 60 * 1000 }));
+                    const minutesToExpire = 5;
+                    localStorage.setItem('data', JSON.stringify({ data: data, expireDate: Date.now() + minutesToExpire * 60 * 1000 }));
 
-                        setIsLogged(data ? true : false);
-                        navigate("/");
-                        resolve(true);
-                    } else {
-                        resolve(false);
-                    }
-                }).catch(resolve(false));
+                    setIsLogged(canBeLogged);
+                    navigate("/");
+                    resolve(canBeLogged);
+                } else {
+                    resolve(false);
+                }
+            }).catch(resolve(false));
         });
     }
 

@@ -19,16 +19,10 @@ const ClearLocalStorage = () => {
 };
 
 const PrivateRoute = ({ element, path }) => {
-	const data = JSON.parse(localStorage.getItem("data"));
 	const { isLogged, setIsLogged } = useContext(AuthContext);
-	
-	if (!isLogged && data && data["data"]) setIsLogged(data ? true : false);
 
-	return isLogged ? (
-		<Home />
-	) : (
-		<Login />
-	);
+
+	return isLogged ? (element) : (<Login />);
 };
 
 function App() {
@@ -36,12 +30,16 @@ function App() {
 
 	ClearLocalStorage();
 
+	const data = JSON.parse(localStorage.getItem("data"));
+	if (!isLogged && data && data["data"]) setIsLogged(data ? true : false);
+
+
 	return (
 		<div className="app">
 			<AuthContext.Provider value={{ isLogged, setIsLogged }}>
 				< Navbar />
 				<Routes>
-					<Route path="/" element={<PrivateRoute />} />
+					<Route path="/" element={<PrivateRoute element={<Home />} />} />
 				</Routes>
 			</AuthContext.Provider>
 		</div>

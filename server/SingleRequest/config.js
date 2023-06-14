@@ -12,6 +12,9 @@ config.urls = {
   grades: "https://synergia.librus.pl/gateway/api/2.0/Grades/",
   gradesCategories: "https://synergia.librus.pl/gateway/api/2.0/Grades/Categories",
   gradesComments: "https://synergia.librus.pl/gateway/api/2.0/Grades/Comments",
+  lessonsTimetables: "https://synergia.librus.pl/gateway/api/2.0/Grades/Timetables",
+  lessonsTimetableEntries: "https://synergia.librus.pl/gateway/api/2.0/TimetableEntries",
+  lessonsHomeworks: "https://synergia.librus.pl/gateway/api/2.0/HomeWorks",
 };
 
 module.exports = config;
