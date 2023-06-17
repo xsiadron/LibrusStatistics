@@ -12,7 +12,6 @@ const Login = (() => {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const librusStatisticsApi = new LibrusStatisticsApi();
 
     const { isLogged, setIsLogged } = useContext(AuthContext);
 
@@ -27,14 +26,17 @@ const Login = (() => {
             }).then(async (response) => {
                 const responseData = response.data;
                 if (responseData) {
-                    const data = await librusStatisticsApi.convertData(responseData);
+                    console.log(responseData);
+                    const librusStatisticsApi = new LibrusStatisticsApi(responseData);
+                    const data = await librusStatisticsApi.convertData();
                     const canBeLogged = data ? true : false;
 
-                    const minutesToExpire = 5;
-                    localStorage.setItem('data', JSON.stringify({ data: data, expireDate: Date.now() + minutesToExpire * 60 * 1000 }));
-
-                    setIsLogged(canBeLogged);
+                    if (canBeLogged) {
+                        const minutesToExpire = 5;
+                        localStorage.setItem('data', JSON.stringify({ data: data, expireDate: Date.now() + minutesToExpire * 60 * 1000 }));
+                    }
                     navigate("/");
+                    setIsLogged(canBeLogged);
                     resolve(canBeLogged);
                 } else {
                     resolve(false);
@@ -48,7 +50,7 @@ const Login = (() => {
             <h1>Login</h1>
             <form onSubmit={Loguj}>
                 <div>
-                    <label htmlFor="login">Email</label>
+                    <label htmlFor="login">Login</label>
                     <input
                         type="text"
                         id="login"
@@ -69,7 +71,6 @@ const Login = (() => {
             </form>
         </section>
     )
-}
-)
+})
 
 export default Login;

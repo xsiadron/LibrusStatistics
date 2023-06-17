@@ -101,6 +101,16 @@ class LibrusApi {
             }).catch(console.error);
         });
     }
+
+    getLessonsTimetableEntries() {
+        return new Promise((resolve) => {
+            let caller = this.caller;
+            caller.get(config.urls.lessonsTimetableEntries).then((response) => {
+                let lessonsTimetableEntries = response.data;
+                resolve(lessonsTimetableEntries);
+            }).catch(console.error);
+        });
+    }
 }
 
 module.exports = LibrusApi;
