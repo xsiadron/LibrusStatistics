@@ -1,11 +1,11 @@
-import axios from "axios";
-import { wrapper } from 'axios-cookiejar-support';
-import { CookieJar } from 'tough-cookie';
+const axios = require("axios");
+const { wrapper } = require('axios-cookiejar-support');
+const { CookieJar } = require('tough-cookie');
 
-const { default: config } = require('../config/librus-config');
+const config = require('./config');
 
 class LibrusApi {
-    constructor(cookies) {
+    constructor() {
         this.cookie = new CookieJar();
 
         this.cookie.setCookie("TestCookie=1;", config.urls.home);
@@ -52,25 +52,65 @@ class LibrusApi {
         });
     }
 
-    getLessonData(lessonId) {
+    getLessons() {
         return new Promise((resolve) => {
             let caller = this.caller;
-            caller.get(config.urls.lessons + lessonId).then((response) => {
+            caller.get(config.urls.lessons).then((response) => {
                 let lessonData = response.data
                 resolve(lessonData);
             }).catch(console.error);
         });
     }
 
-    getSubjectData(subjectId) {
+    getSubjects() {
         return new Promise((resolve) => {
             let caller = this.caller;
-            caller.get(config.urls.subjects + subjectId).then((response) => {
+            caller.get(config.urls.subjects).then((response) => {
                 let subjectData = response.data;
                 resolve(subjectData);
             }).catch(console.error);
         });
     }
+
+    getGrades() {
+        return new Promise((resolve) => {
+            let caller = this.caller;
+            caller.get(config.urls.grades).then((response) => {
+                let gradesData = response.data;
+                resolve(gradesData);
+            }).catch(console.error);
+        });
+    }
+
+    getGradesCategories() {
+        return new Promise((resolve) => {
+            let caller = this.caller;
+            caller.get(config.urls.gradesCategories).then((response) => {
+                let gradesCategoriesData = response.data;
+                resolve(gradesCategoriesData);
+            }).catch(console.error);
+        });
+    }
+
+    getGradesComments() {
+        return new Promise((resolve) => {
+            let caller = this.caller;
+            caller.get(config.urls.gradesComments).then((response) => {
+                let gradesCommentsData = response.data;
+                resolve(gradesCommentsData);
+            }).catch(console.error);
+        });
+    }
+
+    getLessonsTimetableEntries() {
+        return new Promise((resolve) => {
+            let caller = this.caller;
+            caller.get(config.urls.lessonsTimetableEntries).then((response) => {
+                let lessonsTimetableEntries = response.data;
+                resolve(lessonsTimetableEntries);
+            }).catch(console.error);
+        });
+    }
 }
 
-export default LibrusApi;
+module.exports = LibrusApi;

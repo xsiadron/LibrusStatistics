@@ -9,19 +9,12 @@ config.urls = {
   attendancesTypes: "https://synergia.librus.pl/gateway/api/2.0/Attendances/Types",
   subjects: "https://synergia.librus.pl/gateway/api/2.0/Subjects/",
   lessons: "https://synergia.librus.pl/gateway/api/2.0/Lessons/",
+  grades: "https://synergia.librus.pl/gateway/api/2.0/Grades/",
+  gradesCategories: "https://synergia.librus.pl/gateway/api/2.0/Grades/Categories",
+  gradesComments: "https://synergia.librus.pl/gateway/api/2.0/Grades/Comments",
+  lessonsTimetables: "https://synergia.librus.pl/gateway/api/2.0/Grades/Timetables",
+  lessonsTimetableEntries: "https://synergia.librus.pl/gateway/api/2.0/TimetableEntries",
+  lessonsHomeworks: "https://synergia.librus.pl/gateway/api/2.0/HomeWorks",
 };
 
-config.tempPath = '../temp';
-config.dataFilePath = config.tempPath + "/data.json";
-
-config.attendaceTypes = {
-  1: "Nieobecność",
-  2: "Spóźnienie",
-  3: "Nieobecność usprawiedliwiona",
-  4: "Zwolnienie",
-  100: "Obecność",
-  2928: "Nieobecność online",
-  2930: "Obecność online",
-};
-
-export default config;
+module.exports = config;
