@@ -3,6 +3,9 @@ import Grade from "../Grade/Grade"
 import ProgressBar from "../ProgressBar/ProgressBar"
 
 const SubjectCard = ({ name, days, attendancePercentage }) => {
+    const data = JSON.parse(localStorage.getItem('data')).data;
+    const grades = data[name]?.Grades[2] || {};
+
     return (<div className="subject-card">
         <div>
             <div className="subject-card-text-div">
@@ -16,21 +19,13 @@ const SubjectCard = ({ name, days, attendancePercentage }) => {
         </div>
 
         <div className="subject-card-grades">
-            <Grade />
-            <Grade />
-            <Grade />
-            <Grade />
-            <Grade />
-            <Grade />
-            <Grade />
-            <Grade />
-            <Grade />
-            <Grade />
-            <Grade />
-            <Grade />
-            <Grade />
-            <Grade />
-            <Grade />
+            {Object.keys(grades).map((grade, index) => (
+                <Grade
+                    key={index}
+                    grade={grades[grade].Grade}
+                    weight={grades[grade].GradeWeight}
+                />
+            ))}
         </div>
 
         <table>
