@@ -1,0 +1,23 @@
+.grade {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: clamp(20px, 5vw, 25px);
+    height: clamp(20px, 5vw, 25px);
+    background-color: #e9dfdf;
+    border-radius: 5px;
+    color: #000;
+    margin: 2px;
+}
+
+.grade-title {
+    font-size: clamp(12px, 5vw, 15px);
+}
+
+.grade-weight {
+    top: clamp(1px, 0.2vw, 2px);
+    right: clamp(1px, 0.2vw, 2px);
+    position: absolute;
+    font-size: clamp(7px, 0.5vw, 8px);
+}

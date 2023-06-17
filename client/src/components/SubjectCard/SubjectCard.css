@@ -1,0 +1,61 @@
+.subject-card {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    color: #fff;
+    background-color: var(--light-blue);
+    padding: 10px;
+    width: clamp(380px, 80vw, 450px);
+    height: clamp(80px, 40vw, 140px);
+    text-align: left;
+    border-radius: 10px;
+}
+
+.subject-card>div {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.subject-card-text-div {
+    width: 100%;
+}
+
+.attendance {
+    width: 100%;
+}
+
+.subject-card-title {
+    font-size: clamp(1rem, 2vw, 1.1rem);
+}
+
+.subject-card-days {
+    font-size: clamp(0.75rem, 1.5vw, 0.85rem);
+    opacity: 50%;
+    font-weight: 300;
+}
+
+.subject-card-grades {
+    display: flex;
+    padding: 5px 0;
+}
+
+table {
+    width: 100%;
+}
+
+table tr {
+    display: flex;
+    justify-content: space-between;
+}
+
+table th {
+    font-size: clamp(0.80rem, 1.5vw, 0.9rem);
+    width: 100px;
+}
+
+table td {
+    font-size: clamp(0.80rem, 1.5vw, 0.9rem);
+    width: 100px;
+}
