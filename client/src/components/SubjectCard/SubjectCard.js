@@ -1,12 +1,14 @@
 import "./SubjectCard.css"
-import ProgressBar from "../ProgressBar/ProgressBar"
 import DaysBar from "../DaysBar/DaysBar"
 import GradesSection from "../GradesSection/GradesSection"
+import AttendancesSection from "../AttendancesSection/AttendancesSection"
+import GradesAveragesSection from "../GradesAveragesSection/GradesAveragesSection"
 
-const SubjectCard = ({ name, attendancePercentage }) => {
+const SubjectCard = ({ name }) => {
     const data = JSON.parse(localStorage.getItem('data')).data;
     const grades = data[name]?.Grades[2] || {};
     const days = data[name]?.Days || [8];
+    const attendances = data[name]?.Attendances;
 
     return (<div className="subject-card">
         <div>
@@ -14,27 +16,14 @@ const SubjectCard = ({ name, attendancePercentage }) => {
                 <h1 className="subject-card-title">{name}</h1>
                 <DaysBar days={days} />
             </div>
-            <div className="attendance">
-                <ProgressBar color={"#51FF35"} percentage={attendancePercentage} />
-            </div>
+            <AttendancesSection attendancesData={attendances} />
         </div>
 
         <GradesSection name={name} />
 
-        <table>
-            <tbody>
-                <tr>
-                    <th>Semestralna</th>
-                    <td>Średnia: 3.58</td>
-                    <td>Wystawiona: 3</td>
-                </tr>
-                <tr>
-                    <th>Roczna</th>
-                    <td>Średnia: 4.82</td>
-                    <td>Wystawiona: 4</td>
-                </tr>
-            </tbody>
-        </table>
+        <GradesAveragesSection gradesData={grades} />
+
+
     </div>)
 }
 

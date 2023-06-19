@@ -10,14 +10,10 @@ export default function Home() {
             <h1>Home</h1>
             <section className="subjects-cards">
                 {Object.keys(data).map((subjectKey, index) => {
-                    const { Attendances } = data[subjectKey];
-                    const attendancePercentage = (Attendances.Summary[2]["Obecność"] / Attendances.Summary[2]["Quantity"]) * 100;
-
                     return (
                         <SubjectCard
                             key={index}
                             name={subjectKey}
-                            attendancePercentage={attendancePercentage}
                         />
                     );
                 })}

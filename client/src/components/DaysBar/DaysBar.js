@@ -13,7 +13,7 @@ export default function DaysBar({ days }) {
     };
 
     const uniqueDaysSet = new Set(days);
-    const daysString = [...uniqueDaysSet].map(day => daysOfWeek[day]).join(" ");
+    const daysString = [...uniqueDaysSet].map(day => daysOfWeek[day]).join("  ");
 
     return (<div className="subject-card-days">
         <p className="days">{daysString}</p>
