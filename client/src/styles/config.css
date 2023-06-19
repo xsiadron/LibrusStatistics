@@ -1,0 +1,4 @@
+* {
+    --subject-card-width: clamp(350px, 50vw, 450px);
+    --subject-card-height: clamp(80px, 40vw, 140px);
+}

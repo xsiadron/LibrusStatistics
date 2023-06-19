@@ -1,6 +1,8 @@
 import "./ProgressBar.css"
 
 const ProgressBar = ({ color, percentage }) => {
+    percentage = parseFloat(percentage).toFixed(0);
+
     const progressStyle = {
         backgroundColor: color,
         width: `${percentage}%`,

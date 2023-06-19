@@ -6,10 +6,11 @@
     color: #fff;
     background-color: var(--light-blue);
     padding: 10px;
-    width: clamp(380px, 80vw, 450px);
-    height: clamp(80px, 40vw, 140px);
+    width: var(--subject-card-width);
+    height: var(--subject-card-height);
     text-align: left;
     border-radius: 10px;
+    margin: auto;
 }
 
 .subject-card>div {

@@ -1,3 +1,5 @@
+import "./styles/Home.css"
+import "./styles/config.css"
 import SubjectCard from "./components/SubjectCard/SubjectCard"
 
 export default function Home() {
@@ -6,15 +8,19 @@ export default function Home() {
     return (
         <main>
             <h1>Home</h1>
-            <section>
-                {Object.keys(data).map((subjectKey, index) => (
-                    <SubjectCard
-                        key={index}
-                        name={subjectKey}
-                        days={""}
-                        attendancePercentage={25}
-                    />
-                ))}
+            <section className="subjects-cards">
+                {Object.keys(data).map((subjectKey, index) => {
+                    const { Attendances } = data[subjectKey];
+                    const attendancePercentage = (Attendances.Summary[2]["Obecność"] / Attendances.Summary[2]["Quantity"]) * 100;
+
+                    return (
+                        <SubjectCard
+                            key={index}
+                            name={subjectKey}
+                            attendancePercentage={attendancePercentage}
+                        />
+                    );
+                })}
             </section>
         </main>
     )
