@@ -21,6 +21,7 @@
 
 .subject-card-text-div {
     width: 100%;
+    overflow: hidden;
 }
 
 .attendance {
