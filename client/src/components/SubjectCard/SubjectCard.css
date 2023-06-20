@@ -28,8 +28,32 @@
     width: 100%;
 }
 
+.subject-card-title-div {
+    overflow: hidden;
+    height: clamp(1.6rem, 2vw, 1.8rem);
+}
+
 .subject-card-title {
-    font-size: clamp(1rem, 2vw, 1.1rem);
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    overflow-wrap: break-word;
+    padding: 2px;
+    width: 100%;
+}
+
+.text-scroll-animation {
+    animation: text-scroll 4s infinite forwards ease-in-out;
+}
+
+@keyframes text-scroll {
+    0% {
+        transform: translateY(0%);
+    }
+    50% {
+        transform: translateY(-50%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
 }
 
 .subject-card-days {

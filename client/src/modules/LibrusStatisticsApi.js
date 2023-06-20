@@ -14,10 +14,12 @@ class LibrusStatisticsApi {
             let attendancesData = await this.getAttendancesData();
             let gradesData = await this.getGradesData();
             let daysData = await this.getLessonsDaysData();
+            let shortNameData = this.lessonsNames["Short"];
+            console.log(shortNameData);
 
             let librusStatisticsData = {};
 
-            for (let subjectId in this.lessonsNames) {
+            for (let subjectId in this.lessonsNames["Full"]) {
                 let lessonName = this.getLessonNameBySubjectId(subjectId);
 
                 let attendance = attendancesData?.[lessonName]?.Attendances ?? false;
@@ -29,6 +31,7 @@ class LibrusStatisticsApi {
                     librusStatisticsData[lessonName].Attendances = attendance;
                     librusStatisticsData[lessonName].Grades = grade;
                     librusStatisticsData[lessonName].Days = days;
+                    librusStatisticsData[lessonName].Properties = {ShortName: shortNameData[lessonName]};
                 }
             }
             return librusStatisticsData;
@@ -43,22 +46,30 @@ class LibrusStatisticsApi {
         for (let subject of subjects) {
             const subjectId = subject.Id;
             const subjectName = subject.Name;
+            const subjectShortName = subject.Short;
 
-            this.lessonsNames[subjectId] = subjectName;
+            this.lessonsNames["Full"] ??= [];
+            this.lessonsNames["Short"] ??= [];
+
+            this.lessonsNames["Full"][subjectId] = subjectName;
+            this.lessonsNames["Short"][subjectName] = subjectShortName;
         }
     }
 
-    getLessonNameByLessonId(lessonId) {
+    getLessonNameByLessonId(lessonId, shortName = false) {
         const lessons = this.data.lessonsData.Lessons;
 
         const lessonData = lessons.find(item => item.Id === lessonId);
         const subjectId = lessonData.Subject.Id;
 
-        return this.lessonsNames[subjectId];
+        if (shortName) return this.lessonsNames["Short"][subjectId];
+
+        return this.lessonsNames["Full"][subjectId];
     }
 
-    getLessonNameBySubjectId(subjectId) {
-        return this.lessonsNames[subjectId];
+    getLessonNameBySubjectId(subjectId, shortName = false) {
+        if (shortName) return this.lessonsNames["Short"][subjectId];
+        return this.lessonsNames["Full"][subjectId];
     }
 
     async getAttendanceData(attendance) {
@@ -103,7 +114,7 @@ class LibrusStatisticsApi {
         }
         return attendancesData;
     }
-    
+
     prepareAttendancesData(attendancesData, name, semester, type) {
         attendancesData[name] ??= {};
         attendancesData[name].Attendances ??= {};
