@@ -12,7 +12,7 @@
 }
 
 .grade-title {
-    font-size: clamp(12px, 5vw, 15px);
+    font-size: clamp(12px, 3vw, 15px);
 }
 
 .grade-weight {
