@@ -1,23 +1,18 @@
-.grade {
+table {
+    width: 100%;
+}
+
+table tr {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: clamp(20px, 5vw, 25px);
-    height: clamp(20px, 5vw, 25px);
-    background-color: #e9dfdf;
-    border-radius: 5px;
-    color: #000;
-    margin: 2px;
+    justify-content: space-between;
 }
 
-.grade-title {
-    font-size: clamp(12px, 5vw, 15px);
+table th {
+    font-size: clamp(0.75rem, 1.5vw, 0.8rem);
+    width: 20%;
 }
 
-.grade-weight {
-    top: clamp(1px, 0.2vw, 2px);
-    right: clamp(1px, 0.2vw, 2px);
-    position: absolute;
-    font-size: clamp(7px, 0.5vw, 8px);
+table td {
+    font-size: clamp(0.75rem, 1.5vw, 0.8rem);
+    width: 30%;
 }

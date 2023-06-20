@@ -1,6 +1,6 @@
 .subject-card {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: start;
     flex-direction: column;
     color: #fff;
@@ -65,23 +65,4 @@
 .subject-card-grades {
     display: flex;
     padding: 5px 0;
-}
-
-table {
-    width: 100%;
-}
-
-table tr {
-    display: flex;
-    justify-content: space-between;
-}
-
-table th {
-    font-size: clamp(0.80rem, 1.5vw, 0.9rem);
-    width: 100px;
-}
-
-table td {
-    font-size: clamp(0.80rem, 1.5vw, 0.9rem);
-    width: 100px;
 }
