@@ -21,7 +21,6 @@ const ClearLocalStorage = () => {
 const PrivateRoute = ({ element, path }) => {
 	const { isLogged, setIsLogged } = useContext(AuthContext);
 
-
 	return isLogged ? (element) : (<Login />);
 };
 
@@ -37,7 +36,7 @@ function App() {
 	return (
 		<div className="app">
 			<AuthContext.Provider value={{ isLogged, setIsLogged }}>
-				< Navbar />
+				<Navbar />
 				<Routes>
 					<Route path="/" element={<PrivateRoute element={<Home />} />} />
 				</Routes>
