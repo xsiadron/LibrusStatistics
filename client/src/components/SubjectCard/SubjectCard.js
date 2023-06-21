@@ -16,9 +16,9 @@ const SubjectCard = ({ name }) => {
     useEffect(() => {
         const title = titleRef.current;
         if (title.innerHTML.length>45) {
-            title.innerHTML = properties.ShortName;
+            title.innerHTML = `skrót: ${properties.ShortName}`;
         }
-        else if (title.innerHTML.length>24) {
+        else if (title.innerHTML.length>20) {
             title.classList.add("text-scroll-animation");
         }
     });

@@ -1,0 +1,5 @@
+.subject-card-days {
+    font-size: clamp(0.75rem, 1.5vw, 0.85rem);
+    opacity: 50%;
+    font-weight: 300;
+}

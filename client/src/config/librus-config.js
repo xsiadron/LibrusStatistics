@@ -10,7 +10,7 @@ config.attendaceTypes = {
   2930: "Obecność online",
 };
 
-config.serverHostname = "http://192.168.1.102";
+config.serverHostname = "http://localhost";
 config.serverPort = 4000;
 
 module.exports = config;

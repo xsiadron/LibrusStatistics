@@ -26,7 +26,6 @@ const Login = (() => {
             }).then(async (response) => {
                 const responseData = response.data;
                 if (responseData) {
-                    console.log(responseData);
                     const librusStatisticsApi = new LibrusStatisticsApi(responseData);
                     const data = await librusStatisticsApi.convertData();
                     const canBeLogged = data ? true : false;

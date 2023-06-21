@@ -1,3 +1,17 @@
+.grades-averages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.grades-averages p {
+    font-size: clamp(0.8rem, 1vw, 0.9rem);
+    padding: 2px;
+    opacity: 75%;
+}
+
 table {
     width: 100%;
 }
@@ -9,10 +23,8 @@ table tr {
 
 table th {
     font-size: clamp(0.75rem, 1.5vw, 0.8rem);
-    width: 20%;
 }
 
 table td {
     font-size: clamp(0.75rem, 1.5vw, 0.8rem);
-    width: 30%;
 }

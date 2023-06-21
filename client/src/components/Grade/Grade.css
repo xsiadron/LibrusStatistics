@@ -5,7 +5,7 @@
     position: relative;
     width: clamp(20px, 5vw, 25px);
     height: clamp(20px, 5vw, 25px);
-    background-color: #e9dfdf;
+    background-color: var(--light-grey);
     border-radius: 5px;
     color: #000;
     margin: 2px;

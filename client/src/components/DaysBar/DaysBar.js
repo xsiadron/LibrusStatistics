@@ -12,8 +12,9 @@ export default function DaysBar({ days }) {
         8: "Nie ma w planie lekcji"
     };
 
-    const uniqueDaysSet = new Set(days);
-    const daysString = [...uniqueDaysSet].map(day => daysOfWeek[day]).join("  ");
+const uniqueDaysSet = new Set(days);
+const sortedDays = [...uniqueDaysSet].sort((a, b) => a - b);
+const daysString = sortedDays.map(day => daysOfWeek[day]).join("\t");
 
     return (<div className="subject-card-days">
         <p className="days">{daysString}</p>

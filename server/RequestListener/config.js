@@ -17,7 +17,7 @@ config.urls = {
   lessonsHomeworks: "https://synergia.librus.pl/gateway/api/2.0/HomeWorks",
 };
 
-config.hostname = "192.168.1.102";
+config.hostname = "localhost";
 config.port = 4000;
 
 module.exports = config;

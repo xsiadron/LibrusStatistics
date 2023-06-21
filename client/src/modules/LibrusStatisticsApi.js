@@ -15,7 +15,6 @@ class LibrusStatisticsApi {
             let gradesData = await this.getGradesData();
             let daysData = await this.getLessonsDaysData();
             let shortNameData = this.lessonsNames["Short"];
-            console.log(shortNameData);
 
             let librusStatisticsData = {};
 
