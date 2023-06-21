@@ -1,7 +1,33 @@
 .subjects-cards {
     display: grid;
     gap: 15px;
+    padding: 5px;
     grid-template-columns: repeat(auto-fill, minmax(var(--subject-card-width), 1fr));
     grid-template-rows: auto;
     grid-auto-flow: dense;
+}
+
+.sub-nav {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.sub-nav button {
+    color: #fff;
+    outline: none;
+    border: none;
+    padding: 8px;
+    margin: 2px 5px;
+    border-radius: 5px;
+    background-color: #191F25;
+    transition: all 0.1s ease-in-out;
+}
+
+.sub-nav button:hover, .sub-nav button:active  {
+    background-color: #1F252B;
+}
+
+.sub-nav .active-button {
+    background-color: #1F252B !important;
 }

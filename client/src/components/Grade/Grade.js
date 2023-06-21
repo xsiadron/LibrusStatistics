@@ -2,23 +2,23 @@ import "./Grade.css"
 
 export default function Grade({ grade, weight }) {
     const gradesColors = {
-        "0": "CC1A1A",
-        "1": "CC2D2D",
-        "1+": "CC413A",
-        "2-": "CC5237",
-        "2": "CC6634",
-        "2+": "CC772F",
-        "3-": "CC882B",
-        "3": "CC9926",
-        "3+": "CCAA21",
-        "4-": "CCBB1D",
-        "4": "CCCC18",
-        "4+": "CCDD14",
-        "5-": "CCEF10",
-        "5": "D1FF0C",
-        "5+": "D2FF08",
-        "6-": "D4FF05",
-        "6": "D5FF00"
+        "0": "FF2D2D",
+        "1": "FF4141",
+        "1+": "FF5A3E",
+        "2-": "FF733B",
+        "2": "FF8C38",
+        "2+": "FFA535",
+        "3-": "FFBE32",
+        "3": "FFD72F",
+        "3+": "FFEF2C",
+        "4-": "FFF829",
+        "4": "F1FF26",
+        "4+": "D9FF23",
+        "5-": "C2FF20",
+        "5": "AAFF1D",
+        "5+": "93FF1A",
+        "6-": "7BFF17",
+        "6": "6EFF00"
     };
 
     const gradeStyle = {

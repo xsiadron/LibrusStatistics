@@ -1,20 +1,17 @@
 import "./GradesSection.css"
 import Grade from "../Grade/Grade"
 
-export default function GradesSection({ name }) {
-    const data = JSON.parse(localStorage.getItem('data')).data;
-    const grades = data[name]?.Grades[2] || {};
-
+export default function GradesSection({ gradesData }) {
     return (<div className="subject-card-grades">
-        {Object.keys(grades).map((gradeKey, index) => {
-            if (grades[gradeKey].IsFinal || grades[gradeKey].IsFinalProposition || grades[gradeKey].IsSemester || grades[gradeKey].IsSemesterProposition) {
+        {Object.keys(gradesData).map((gradeKey, index) => {
+            if (gradesData[gradeKey].IsFinal || gradesData[gradeKey].IsFinalProposition || gradesData[gradeKey].IsSemester || gradesData[gradeKey].IsSemesterProposition) {
                 return;
             }
 
             return (<Grade
                 key={index}
-                grade={grades[gradeKey].Grade}
-                weight={grades[gradeKey].GradeWeight}
+                grade={gradesData[gradeKey].Grade}
+                weight={gradesData[gradeKey].GradeWeight}
             />)
         })}
     </div>)

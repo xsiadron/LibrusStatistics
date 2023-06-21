@@ -1,18 +1,17 @@
 import "./AttendancesSection.css"
 import ProgressBar from "../ProgressBar/ProgressBar"
 
-const AttendancesSection = ({ attendancesData }) => {
-    const attendances = attendancesData.Summary[2];
-    const attendancePercentage = (attendances["Obecność"] / attendances["Quantity"]) * 100;
-    let attendanceQuantity = attendances["Quantity"];
+const AttendancesSection = ({ attendancesSummaryData }) => {
+    const attendancePercentage = (attendancesSummaryData["Obecność"] / attendancesSummaryData["Quantity"]) * 100;
+    let attendanceQuantity = attendancesSummaryData["Quantity"];
 
     let attendanceQuantityString = "";
-    for (let attendance in attendances) {
+    for (let attendance in attendancesSummaryData) {
         if (attendance != "Quantity") {
-            if (attendance.toLowerCase() == "obecność") attendanceQuantityString += attendances[attendance] + "ob  "
-            else if (attendance.toLowerCase() == "nieobecność") attendanceQuantityString += attendances[attendance] + "nb  "
-            else if (attendance.toLowerCase() == "nieobecność usprawiedliwiona") attendanceQuantityString += attendances[attendance] + "nu  "
-            else if (attendance.toLowerCase() == "spóźnienie") attendanceQuantityString += attendances[attendance] + "sp  "
+            if (attendance.toLowerCase() == "obecność") attendanceQuantityString += attendancesSummaryData[attendance] + "ob  "
+            else if (attendance.toLowerCase() == "nieobecność") attendanceQuantityString += attendancesSummaryData[attendance] + "nb  "
+            else if (attendance.toLowerCase() == "nieobecność usprawiedliwiona") attendanceQuantityString += attendancesSummaryData[attendance] + "nu  "
+            else if (attendance.toLowerCase() == "spóźnienie") attendanceQuantityString += attendancesSummaryData[attendance] + "sp  "
         }
     }
 
