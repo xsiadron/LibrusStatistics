@@ -43,6 +43,7 @@ form a {
 }
 
 .input-div input {
+    caret-color: #fff;
     width: 100%;
     border: none;
     border-bottom: 4px solid var(--light-blue);
