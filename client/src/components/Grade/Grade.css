@@ -9,6 +9,7 @@
     border-radius: 5px;
     color: #000;
     margin: 2px;
+    animation: GradeAnimation 0.5s linear;
 }
 
 .grade-title {
@@ -22,4 +23,16 @@
     position: absolute;
     font-size: clamp(7px, 0.5vw, 8px);
     font-weight: 00;
+}
+
+@keyframes GradeAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    
+    1000% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }
