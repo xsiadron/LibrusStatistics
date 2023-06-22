@@ -16,7 +16,6 @@ const SubjectCard = ({ name, semester }) => {
     if (semester == 0) {
         let semestersGrades = data[name]?.Grades || [];
         let semestersAttendances = data[name]?.Attendances?.Summary || [];
-        console.log(semestersAttendances)
 
         grades = Object.values(semestersGrades).reduce((previousData, semesterGrade) => { return previousData.concat(semesterGrade); });
 
@@ -30,9 +29,6 @@ const SubjectCard = ({ name, semester }) => {
             }
             return result;
         }, {});;
-
-        console.log(attendances);
-        // attendances = Object.values(semestersAttendances).reduce((previousData, semesterAttendance) => { return previousData.concat(semesterAttendance) });
     }
 
 
@@ -60,7 +56,7 @@ const SubjectCard = ({ name, semester }) => {
 
         <GradesSection gradesData={grades} />
 
-        <GradesAveragesSection gradesData={grades} />
+        <GradesAveragesSection gradesData={grades} semester={semester}/>
 
 
     </div>)

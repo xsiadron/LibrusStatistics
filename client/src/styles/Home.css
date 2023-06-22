@@ -5,6 +5,7 @@
     grid-template-columns: repeat(auto-fill, minmax(var(--subject-card-width), 1fr));
     grid-template-rows: auto;
     grid-auto-flow: dense;
+    animation: Test 1s;
 }
 
 .sub-nav {
@@ -16,18 +17,32 @@
 .sub-nav button {
     color: #fff;
     outline: none;
+    font-size: 14px;
     border: none;
-    padding: 8px;
+    padding: 10px;
     margin: 2px 5px;
     border-radius: 5px;
-    background-color: #191F25;
-    transition: all 0.1s ease-in-out;
+    background-color: var(--lighter-blue);
+    transition: all 0.1s ease;
 }
 
-.sub-nav button:hover, .sub-nav button:active  {
-    background-color: #1F252B;
+.sub-nav button:hover,
+.sub-nav button:active {
+    background-color: var(--dark-blue);
 }
 
 .sub-nav .active-button {
-    background-color: #1F252B !important;
+    background-color: var(--dark-blue) !important;
+}
+
+@keyframes Test {
+    0% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
 }

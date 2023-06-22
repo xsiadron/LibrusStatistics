@@ -13,6 +13,7 @@
 
 .grade-title {
     font-size: clamp(12px, 3vw, 15px);
+    font-weight: 500;
 }
 
 .grade-weight {
@@ -20,4 +21,5 @@
     right: clamp(1px, 0.2vw, 2px);
     position: absolute;
     font-size: clamp(7px, 0.5vw, 8px);
+    font-weight: 00;
 }

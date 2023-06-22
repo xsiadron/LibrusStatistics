@@ -1,10 +1,11 @@
+import CountUp from 'react-countup';
 import "./GradesAveragesSection.css"
 import infoCircleIcon from '../../icons/info-circle.svg';
 
-const GradesAveragesSection = ({ gradesData }) => {
+const GradesAveragesSection = ({ gradesData, semester }) => {
     if (!gradesData.length > 0) return (
         <div className="grades-averages">
-            <img src={infoCircleIcon} alt="informacja"/>
+            <img src={infoCircleIcon} alt="informacja" />
             <p>Brak ocen dla tego przedmiotu</p>
         </div>);
 
@@ -42,6 +43,16 @@ const GradesAveragesSection = ({ gradesData }) => {
         return average.toFixed(2);
     }
 
+    function getProposedGrade(grades) {
+        const proposedGrade = grades.find((grade) => grade.IsSemesterProposition === true);
+
+        if (!proposedGrade) {
+            return "-";
+        }
+
+        return proposedGrade.Grade;
+    }
+
     function getFinalGrade(grades) {
         const finalGrade = grades.find((grade) => grade.IsFinal === true);
 
@@ -52,12 +63,48 @@ const GradesAveragesSection = ({ gradesData }) => {
         return finalGrade.Grade;
     }
 
+    function getSemesterGrade(grades) {
+        const semestralGrade = grades.find((grade) => grade.IsSemester === true);
+
+        if (!semestralGrade) {
+            return "-";
+        }
+
+        return semestralGrade.Grade;
+    }
+
+    function CountUpOrString(end) {
+        if (!parseInt(end)) return "-";
+        return (<CountUp end={end} decimals={2} duration={0.8} easingFn={(t, b, c, d) => c * t / d + b} />)
+    }
+
     const grades = Object.values(gradesData);
 
+    if (semester == 0) {
+        const finalAverage = calculateAverage(grades);
+        const proposedFinalGrade = getProposedGrade(grades);
+        const finalGrade = getFinalGrade(grades);
+
+        return (<div className="grades-averages">
+
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Roczna</th>
+                    </tr>
+                    <tr>
+                        <td>Średnia: {CountUpOrString(finalAverage)}</td>
+                        <td>Proponowana: {CountUpOrString(proposedFinalGrade)}</td>
+                        <td>Wystawiona: {CountUpOrString(finalGrade)}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>)
+    }
+
     const proposedAverage = calculateAverage(grades);
-    const finalAverage = 0;
-    const proposedGrade = 0;
-    const finalGrade = getFinalGrade(grades);
+    const proposedGrade = getProposedGrade(grades);
+    const semesterGrade = getSemesterGrade(grades);
 
     return (<div className="grades-averages">
 
@@ -67,9 +114,9 @@ const GradesAveragesSection = ({ gradesData }) => {
                     <th>Semestralna</th>
                 </tr>
                 <tr>
-                    <td>Średnia: {proposedAverage}</td>
-                    <td>Proponowana: {proposedAverage}</td>
-                    <td>Wystawiona: {finalGrade} </td>
+                    <td>Średnia: {CountUpOrString(proposedAverage)}</td>
+                    <td>Proponowana: {CountUpOrString(proposedGrade)}</td>
+                    <td>Wystawiona: {CountUpOrString(semesterGrade)}</td>
                 </tr>
             </tbody>
         </table>

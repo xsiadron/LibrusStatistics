@@ -31,7 +31,6 @@ const Login = (() => {
                     const canBeLogged = data ? true : false;
 
                     if (canBeLogged) {
-                        console.log(data);
                         const minutesToExpire = 15;
                         localStorage.setItem('data', JSON.stringify({ data: data, expireDate: Date.now() + minutesToExpire * 60 * 1000 }));
                     }

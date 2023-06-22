@@ -12,6 +12,6 @@
 
 body {
   margin: 0;
-  background-color: #13191F;
+  background-color: var(--blue);
   color: var(--light-grey);
 }

@@ -1,4 +1,10 @@
 .subject-card-grades {
-    display: flex;
-    padding: 5px 0;
+    display: grid;
+    width: 100%;
+    min-height: clamp(20px, 5vw, 25px);
+    padding: 2px 0;
+    overflow: hidden;
+    grid-gap: 0 clamp(0px, 1vw, 3px);
+    grid-template-columns: repeat(auto-fill, clamp(20px, 5vw, 25px));
+    grid-template-rows: auto;
 }
