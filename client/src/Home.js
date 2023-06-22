@@ -15,23 +15,25 @@ export default function Home() {
     }
 
     return (
-        <main>
-            <section className="sub-nav">
-                <button onClick={changeSemester} data-value="1" className={buttonIndex == 1 ? 'active-button' : ''}>Semestr 1</button>
-                <button onClick={changeSemester} data-value="2" className={buttonIndex == 2 ? 'active-button' : ''}>Semestr 2</button>
-                <button onClick={changeSemester} data-value="0" className={buttonIndex == 0 ? 'active-button' : ''}>Wszystkie</button>
-            </section>
-            <section className="subjects-cards">
-                {Object.keys(data).map((subjectKey, index) => {
-                    return (
-                        <SubjectCard
-                            key={index}
-                            name={subjectKey}
-                            semester={displayedSemester}
-                        />
-                    );
-                })}
-            </section>
-        </main>
+        <>
+            <main>
+                <section className="sub-nav">
+                    <button onClick={changeSemester} data-value="1" className={buttonIndex == 1 ? 'active-button' : ''}>Semestr 1</button>
+                    <button onClick={changeSemester} data-value="2" className={buttonIndex == 2 ? 'active-button' : ''}>Semestr 2</button>
+                    <button onClick={changeSemester} data-value="0" className={buttonIndex == 0 ? 'active-button' : ''}>Wszystkie</button>
+                </section>
+                <section className="subjects-cards">
+                    {Object.keys(data).map((subjectKey, index) => {
+                        return (
+                            <SubjectCard
+                                key={index}
+                                name={subjectKey}
+                                semester={displayedSemester}
+                            />
+                        );
+                    })}
+                </section>
+            </main>
+        </>
     )
 }

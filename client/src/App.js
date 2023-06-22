@@ -2,9 +2,9 @@ import { Route, Routes } from "react-router-dom"
 import { useState, useContext } from "react"
 import './styles/App.css';
 import './styles/Colors.css';
-import Navbar from './components/Navbar/Navbar';
 import Home from './Home';
 import Login from './Login';
+import Navbar from './components/Navbar/Navbar';
 import { AuthContext } from "./AuthContext";
 
 const ClearLocalStorage = () => {

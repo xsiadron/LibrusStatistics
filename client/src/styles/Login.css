@@ -1,20 +1,113 @@
 .login {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    margin: 50px;
+}
+
+form {
+    display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 300px;
 }
 
-.login label {
-
+form p {
+    font-size: 14px;
+    padding: 4px;
 }
 
-.login input {
+form a {
     color: #fff;
+}
+
+.input-div {
+    position: relative;
+    margin: 20px;
+    width: 100%;
+}
+
+.input-div label {
+    position: absolute;
+    transform: translateY(-27px);
+    color: #fff;
+
+    display: block;
+    cursor: text;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    top: 30px;
+}
+
+.input-div input {
     width: 100%;
     border: none;
-    border-bottom: 2px solid #fff;
+    border-bottom: 4px solid var(--light-blue);
     background-color: transparent;
+    color: #fff;
+
     outline: none;
     padding: 5px 0px;
+}
+
+.input-div .underline {
+    position: absolute;
+    bottom: 0px;
+    height: 4px;
+    width: 0%;
+    background-color: var(--dark-blue);
+    transition: all 0.2s ease;
+}
+
+.input-div input:focus~.underline,
+.input-div input:valid~.underline,
+.input-div input:not(:placeholder-shown)~.underline {
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.input-div input:focus~label,
+.input-div input:valid~label,
+.input-div input:not(:placeholder-shown)~label {
+    transform: translateY(-50px);
+    transition: all 0.3s ease;
+    font-size: 0.75rem;
+    color: var(--light-grey);
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--blue) inset !important;
+    -webkit-text-fill-color: white !important;
+}
+
+.input-div input:-webkit-autofill:focus~.underline,
+.input-div input:-webkit-autofill:valid~.underline,
+.input-div input:-webkit-autofill:not(:placeholder-shown)~.underline {
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.login-button {
+    width: 100%;
+}
+
+.login-footer {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--dark-blue);
+    bottom: 10px;
+    border-radius: 8px;
+    left: 2%;
+    width: 96%;
+    z-index: 100;
+    padding: 10px;
+    transition: 0.5s all;
 }

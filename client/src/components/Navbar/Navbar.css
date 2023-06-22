@@ -6,7 +6,6 @@
     background-color: var(--dark-blue);
     top: 0;
     width: 100%;
-    /* height: 75px; */
     padding: 20px 0px;
     z-index: 100;
     transition: 0.5s all;
