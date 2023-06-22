@@ -28,6 +28,7 @@ button {
   transition: all 0.2s ease;
 }
 
-button:hover {
+button:hover,
+button:disabled {
   background-color: var(--dark-blue);
 }
