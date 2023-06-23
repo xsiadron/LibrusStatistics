@@ -6,6 +6,7 @@ import "./styles/Login.css"
 import { AuthContext } from "./AuthContext";
 import LibrusStatisticsApi from "./modules/LibrusStatisticsApi"
 import infoCircleIcon from './icons/info-circle.svg';
+import exclaminationCircle from './icons/exclamination-circle.svg';
 
 import config from "./config/librus-config"
 
@@ -27,35 +28,51 @@ const Login = (() => {
         document.querySelector(".login-footer").style.display = "none";
     }
 
+    function showError() {
+        setInputsEnabled(false);
+        document.querySelector(".loader-div").classList.add("disabled");
+        document.querySelector(".error-div").classList.remove("disabled");
+    }
+
+    function prepareToLogin() {
+        setInputsEnabled(true);
+        document.querySelector(".loader-div").classList.remove("disabled");
+        document.querySelector(".error-div").classList.add("disabled");
+    }
+
+    function setInputsEnabled(enabled = false) {
+        document.querySelector(".login-button").disabled = enabled;
+        document.querySelector("input").disabled = enabled;
+    }
+
+    async function loginSucceed(responseData) {
+        if (responseData) {
+            const librusStatisticsApi = new LibrusStatisticsApi(responseData);
+            const data = await librusStatisticsApi.convertData();
+            const canBeLogged = data ? true : false;
+            const minutesToExpire = 15;
+            localStorage.setItem('data', JSON.stringify({ data: data, expireDate: Date.now() + minutesToExpire * 60 * 1000 }));
+            setIsLogged(canBeLogged);
+            setInputsEnabled(false);
+            navigate("/");
+            return true;
+        } else throw new Error;
+    }
+
     function Loguj(e) {
         e.preventDefault();
-        document.querySelector(".login-button").disabled = true;
-        document.querySelector("input").disabled = true;
-        if (document.querySelector(".disabled")) document.querySelector(".disabled").classList.remove("disabled");
+        prepareToLogin();
         return new Promise(async (resolve) => {
             let caller = wrapper(axios.create());
-
             caller.post(`${config.serverHostname}:${config.serverPort}/`, {
                 login: login,
                 password: password,
             }).then(async (response) => {
-                const responseData = response.data;
-                if (responseData) {
-                    const librusStatisticsApi = new LibrusStatisticsApi(responseData);
-                    const data = await librusStatisticsApi.convertData();
-                    const canBeLogged = data ? true : false;
-
-                    if (canBeLogged) {
-                        const minutesToExpire = 15;
-                        localStorage.setItem('data', JSON.stringify({ data: data, expireDate: Date.now() + minutesToExpire * 60 * 1000 }));
-                    }
-                    navigate("/");
-                    setIsLogged(canBeLogged);
-                    resolve(canBeLogged);
-                } else {
-                    resolve(false);
-                }
-            }).catch(resolve(false));
+                resolve(loginSucceed(response.data));
+            }).catch(() => {
+                showError();
+                resolve(false);
+            });
         });
     }
 
@@ -92,6 +109,10 @@ const Login = (() => {
                 <div className="loader-div disabled">
                     <span className="loader"></span>
                     <p>Trwa pobieranie danych z serwera...</p>
+                </div>
+                <div className="error-div disabled">
+                    <img src={exclaminationCircle} className="error"></img>
+                    <p>Nie udało się pobrać danych z serwera :C</p>
                 </div>
             </main>
             <footer className="login-footer">
