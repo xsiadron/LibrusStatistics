@@ -13,6 +13,18 @@ form {
     align-items: center;
     height: 100%;
     width: 300px;
+    animation: loginInitialization 0.3s ease-in-out forwards;
+}
+
+@keyframes loginInitialization {
+    0% {
+        transform: translateY(-200px);
+        opacity: 0;
+    }    
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
 }
 
 form p {
@@ -104,6 +116,16 @@ select:-webkit-autofill {
     z-index: 100;
     padding: 10px;
     transition: 0.5s all;
+    animation: footerInitialization 0.8s linear forwards;
+}
+
+@keyframes footerInitialization {
+    0% {
+        transform: translateY(200px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 .login-footer p {

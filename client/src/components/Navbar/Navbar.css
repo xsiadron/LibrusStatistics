@@ -9,7 +9,21 @@
     padding: 20px 0px;
     z-index: 100;
     transition: 0.5s all;
+    opacity: 0;
+    animation: loginNavbar 0.5s linear forwards;
 }
+
+@keyframes loginNavbar {
+    0% {
+        transform: translateY(-200px);
+        opacity: 0;
+    }    
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
 
 .nav-placeholder {
     height: 110px;
