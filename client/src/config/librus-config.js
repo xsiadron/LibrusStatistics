@@ -18,4 +18,9 @@ config.errors = {
   serverNotResponding: "<b>Serwer nie odpowiada.</b><br/> Spróbuj ponownie lub skontaktuj się z administratorem strony."
 };
 
+config.messages = {
+  loggedOut: "<b>Zostałeś poprawie wylogowany.</b><br/> Twoje dane nie zostały nigdzie przechowane!",
+  loading: "<b>Trwa pobieranie danych z serwera...</b><br/> Ten proces powinien trwać 2-10 sekund"
+}
+
 module.exports = config;

@@ -2,11 +2,13 @@ import axios from "axios";
 import { wrapper } from 'axios-cookiejar-support';
 import { useState, useContext, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import ReactHtmlParser from "react-html-parser"
 import "./styles/Login.css"
 import { AuthContext } from "./AuthContext";
 import LibrusStatisticsApi from "./modules/LibrusStatisticsApi"
 import infoCircleIcon from './icons/info-circle.svg';
-import exclaminationCircle from './icons/exclamination-circle.svg';
+import exclaminationCircleIcon from './icons/exclamination-circle.svg';
+import loggedOutIcon from './icons/logged-out.svg';
 
 import config from "./config/librus-config"
 
@@ -39,16 +41,17 @@ const Login = (() => {
         setInputsDisabled(true);
         document.querySelector(".loader-div").classList.remove("disabled");
         document.querySelector(".error-div").classList.add("disabled");
+        document.querySelector(".logged-out-div").classList.add("disabled");
     }
 
     function setInputsDisabled(disabled = true) {
         document.querySelector(".login-button").disabled = disabled;
         const inputs = document.querySelectorAll("input");
-      
+
         inputs.forEach((input) => {
-          input.disabled = disabled;
+            input.disabled = disabled;
         });
-      }
+    }
 
     function saveData(data) {
         if (typeof data !== "object" || data === null) {
@@ -61,12 +64,11 @@ const Login = (() => {
     async function loginSucceed(responseData) {
         const librusStatisticsApi = new LibrusStatisticsApi(responseData);
         const data = await librusStatisticsApi.convertData();
-        const canBeLogged = data ? true : false;
 
         saveData(data);
 
-        setIsLogged(canBeLogged);
         setInputsDisabled(false);
+        setIsLogged(true);
         navigate("/");
         return true;
     }
@@ -88,6 +90,16 @@ const Login = (() => {
             });
         });
     }
+
+    const loggedOut = localStorage.getItem("logged-out");
+    useEffect(() => {
+        const handleBeforeUnload = (event) => {
+            if (loggedOut) localStorage.removeItem("logged-out");
+        };
+
+        window.addEventListener("beforeunload", handleBeforeUnload);
+    });
+
 
     return (
         <section className="login">
@@ -121,11 +133,15 @@ const Login = (() => {
             <main>
                 <div className="loader-div disabled">
                     <span className="loader"></span>
-                    <p className="loading-message">Trwa pobieranie danych z serwera...</p>
+                    <p className="logged-out-message">{ReactHtmlParser(config.messages.loading)}</p>
                 </div>
                 <div className="error-div disabled">
-                    <img src={exclaminationCircle} className="error"></img>
-                    <p className="error-message">Nie udało się pobrać danych z serwera :C</p>
+                    <img src={exclaminationCircleIcon} className="error"></img>
+                    <p className="error-message">{config.errors.unknown}</p>
+                </div>
+                <div className={`logged-out-div ${loggedOut ? "" : "disabled"}`}>
+                    <img src={loggedOutIcon} className="logged-out"></img>
+                    <p className="logged-out-message">{ReactHtmlParser(config.messages.loggedOut)}</p>
                 </div>
             </main>
             <footer className="login-footer">

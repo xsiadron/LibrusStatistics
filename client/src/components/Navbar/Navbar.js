@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import './Navbar.css';
 import logoutIcon from '../../icons/logout.svg';
 import { useContext } from "react"
@@ -5,6 +6,8 @@ import { AuthContext } from '../../AuthContext';
 
 const Navbar = () => {
     const { isLogged, setIsLogged } = useContext(AuthContext);
+
+    const navigate = useNavigate();
 
     window.onscroll = function () { scrollFunction() };
 
@@ -18,6 +21,8 @@ const Navbar = () => {
 
     function logout() {
         localStorage.clear();
+        localStorage.setItem("logged-out", true);
+        navigate("/");
         setIsLogged(false);
     }
 
@@ -27,7 +32,7 @@ const Navbar = () => {
             <nav className="nav">
                 <a href="/" className="site-title">Librus Statistics</a>
                 {isLogged && (
-                    <a href="/" className="site-logout" onClick={logout}></a>
+                    <a className="site-logout" onClick={logout}></a>
                 )}
             </nav>
         </>)
