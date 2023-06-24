@@ -1,7 +1,7 @@
 const config = {};
 
-config.hostname = "localhost";
-config.port = 4000;
+config.hostname = process.env.serverHostname;
+config.port = process.env.serverPort;
 
 config.urls = {
   home: "https://synergia.librus.pl",
