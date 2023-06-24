@@ -1,5 +1,8 @@
 const config = {};
 
+config.hostname = "localhost";
+config.port = 4000;
+
 config.urls = {
   home: "https://synergia.librus.pl",
   login: "https://api.librus.pl/OAuth/Authorization?client_id=46&response_type=code&scope=mydata",
@@ -17,7 +20,15 @@ config.urls = {
   lessonsHomeworks: "https://synergia.librus.pl/gateway/api/2.0/HomeWorks",
 };
 
-config.hostname = "localhost";
-config.port = 4000;
+config.errors = {
+    authorize: "<b>Nie udało się zalogować.</b><br/> Sprawdź poprawność wprowadzonych danych i spróbuj ponownie.",
+    attendances: "<b>Nie udało się pobrać danych dotyczących obecności.</b><br/> Spróbuj ponownie lub skontaktuj się z administratorem strony.",
+    lessons: "<b>Nie udało się pobrać danych dotyczących lekcji.</b><br/> Spróbuj ponownie lub skontaktuj się z administratorem strony.",
+    subjects: "<b>Nie udało się pobrać danych dotyczących przedmiotów.</b><br/> Spróbuj ponownie lub skontaktuj się z administratorem strony.",
+    grades: "<b>Nie udało się pobrać danych dotyczących ocen.</b><br/> Spróbuj ponownie lub skontaktuj się z administratorem strony.",
+    gradesCategories: "<b>Nie udało się pobrać danych dotyczących kategorii ocen.</b><br/> Spróbuj ponownie lub skontaktuj się z administratorem strony.",
+    gradesComments: "<b>Nie udało się pobrać danych dotyczących komentarzy ocen.</b><br/> Spróbuj ponownie lub skontaktuj się z administratorem strony.",
+    lessonsTimetableEntries: "<b>Nie udało się pobrać danych dotyczących planu lekcji.</b><br/> Spróbuj ponownie lub skontaktuj się z administratorem strony."
+};
 
 module.exports = config;

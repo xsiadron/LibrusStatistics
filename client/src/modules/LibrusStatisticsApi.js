@@ -30,12 +30,12 @@ class LibrusStatisticsApi {
                     librusStatisticsData[lessonName].Attendances = attendance;
                     librusStatisticsData[lessonName].Grades = grade;
                     librusStatisticsData[lessonName].Days = days;
-                    librusStatisticsData[lessonName].Properties = {ShortName: shortNameData[lessonName]};
+                    librusStatisticsData[lessonName].Properties = { ShortName: shortNameData[lessonName] };
                 }
             }
             return librusStatisticsData;
         } catch (error) {
-            return false;
+            return error;
         }
     }
 

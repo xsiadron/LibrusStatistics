@@ -3,35 +3,37 @@ import LibrusApi from "./LibrusApi.js";
 export const handler = async (event) => {
 	const { httpMethod, login, password, headers } = event;
 
-	let data = await downloadData(login, password);
-
-	return (data);
+	try {
+		let data = await downloadData(login, password);
+		return (data);
+	} catch (error) {
+		return { error: error.message };
+	}
 }
 
 async function downloadData(login, password) {
-	let librusApi = new LibrusApi();
 	try {
-		const authorized = await librusApi.authorize(login, password);
-		if (authorized) {
-			const attendances = await librusApi.getAttendances();
-			const lessons = await librusApi.getLessons();
-			const subjects = await librusApi.getSubjects();
-			const grades = await librusApi.getGrades();
-			const gradesCategories = await librusApi.getGradesCategories();
-			const gradesComments = await librusApi.getGradesComments();
-			const lessonsTimetableEntries = await librusApi.getLessonsTimetableEntries();
+		let librusApi = new LibrusApi();
 
-			return {
-				attendancesData: attendances,
-				lessonsData: lessons,
-				subjectsData: subjects,
-				gradesData: grades,
-				gradesCategoriesData: gradesCategories,
-				gradesCommentsData: gradesComments,
-				lessonsTimetableEntriesData: lessonsTimetableEntries
-			};
-		} else throw new Error("Not authorized");
+		await librusApi.authorize(login, password);
+		const attendances = await librusApi.getAttendances();
+		const lessons = await librusApi.getLessons();
+		const subjects = await librusApi.getSubjects();
+		const grades = await librusApi.getGrades();
+		const gradesCategories = await librusApi.getGradesCategories();
+		const gradesComments = await librusApi.getGradesComments();
+		const lessonsTimetableEntries = await librusApi.getLessonsTimetableEntries();
+
+		return {
+			attendancesData: attendances,
+			lessonsData: lessons,
+			subjectsData: subjects,
+			gradesData: grades,
+			gradesCategoriesData: gradesCategories,
+			gradesCommentsData: gradesComments,
+			lessonsTimetableEntriesData: lessonsTimetableEntries
+		};
 	} catch (error) {
-		return false;
+		throw error;
 	}
 }

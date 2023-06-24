@@ -63,7 +63,7 @@ form a {
     color: #fff;
 
     outline: none;
-    padding: 5px 0px;
+    padding: 5px 5px;
 }
 
 .input-div .underline {
@@ -195,6 +195,10 @@ select:-webkit-autofill {
 
 .disabled {
     display: none !important;
+}
+
+input:disabled {
+    background-color: var(--lighter-blue) !important;
 }
 
 .loader-div {

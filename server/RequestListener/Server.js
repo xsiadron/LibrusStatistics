@@ -22,36 +22,38 @@ app.use(function (req, res, next) {
 
 app.post('/', async function (req, res) {
 	const { login, password } = req.body;
-	let data = await downloadData(login, password);
-
-	res.send(data);
+	try {
+		let data = await downloadData(login, password);
+		res.send(data);
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
 });
 
 async function downloadData(login, password) {
-	let librusApi = new LibrusApi();
 	try {
-		const authorized = await librusApi.authorize(login, password);
-		if (authorized) {
-			const attendances = await librusApi.getAttendances();
-			const lessons = await librusApi.getLessons();
-			const subjects = await librusApi.getSubjects();
-			const grades = await librusApi.getGrades();
-			const gradesCategories = await librusApi.getGradesCategories();
-			const gradesComments = await librusApi.getGradesComments();
-			const lessonsTimetableEntries = await librusApi.getLessonsTimetableEntries();
+		let librusApi = new LibrusApi();
 
-			return {
-				attendancesData: attendances,
-				lessonsData: lessons,
-				subjectsData: subjects,
-				gradesData: grades,
-				gradesCategoriesData: gradesCategories,
-				gradesCommentsData: gradesComments,
-				lessonsTimetableEntriesData: lessonsTimetableEntries
-			};
-		} else throw new Error("Not authorized");
+		await librusApi.authorize(login, password);
+		const attendances = await librusApi.getAttendances();
+		const lessons = await librusApi.getLessons();
+		const subjects = await librusApi.getSubjects();
+		const grades = await librusApi.getGrades();
+		const gradesCategories = await librusApi.getGradesCategories();
+		const gradesComments = await librusApi.getGradesComments();
+		const lessonsTimetableEntries = await librusApi.getLessonsTimetableEntries();
+
+		return {
+			attendancesData: attendances,
+			lessonsData: lessons,
+			subjectsData: subjects,
+			gradesData: grades,
+			gradesCategoriesData: gradesCategories,
+			gradesCommentsData: gradesComments,
+			lessonsTimetableEntriesData: lessonsTimetableEntries
+		};
 	} catch (error) {
-		return false;
+		throw error;
 	}
 }
 

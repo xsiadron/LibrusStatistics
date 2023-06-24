@@ -28,35 +28,47 @@ const Login = (() => {
         document.querySelector(".login-footer").style.display = "none";
     }
 
-    function showError() {
-        setInputsEnabled(false);
+    function showError(error = config.errors.unknown) {
+        setInputsDisabled(false);
         document.querySelector(".loader-div").classList.add("disabled");
         document.querySelector(".error-div").classList.remove("disabled");
+        document.querySelector(".error-message").innerHTML = error;
     }
 
     function prepareToLogin() {
-        setInputsEnabled(true);
+        setInputsDisabled(true);
         document.querySelector(".loader-div").classList.remove("disabled");
         document.querySelector(".error-div").classList.add("disabled");
     }
 
-    function setInputsEnabled(enabled = false) {
-        document.querySelector(".login-button").disabled = enabled;
-        document.querySelector("input").disabled = enabled;
+    function setInputsDisabled(disabled = true) {
+        document.querySelector(".login-button").disabled = disabled;
+        const inputs = document.querySelectorAll("input");
+      
+        inputs.forEach((input) => {
+          input.disabled = disabled;
+        });
+      }
+
+    function saveData(data) {
+        if (typeof data !== "object" || data === null) {
+            return new Error("Dane pobrane z serwera są nieprawidłowe. Spróbuj ponownie");
+        }
+        const minutesToExpire = 15;
+        localStorage.setItem('data', JSON.stringify({ data: data, expireDate: Date.now() + minutesToExpire * 60 * 1000 }));
     }
 
     async function loginSucceed(responseData) {
-        if (responseData) {
-            const librusStatisticsApi = new LibrusStatisticsApi(responseData);
-            const data = await librusStatisticsApi.convertData();
-            const canBeLogged = data ? true : false;
-            const minutesToExpire = 15;
-            localStorage.setItem('data', JSON.stringify({ data: data, expireDate: Date.now() + minutesToExpire * 60 * 1000 }));
-            setIsLogged(canBeLogged);
-            setInputsEnabled(false);
-            navigate("/");
-            return true;
-        } else throw new Error;
+        const librusStatisticsApi = new LibrusStatisticsApi(responseData);
+        const data = await librusStatisticsApi.convertData();
+        const canBeLogged = data ? true : false;
+
+        saveData(data);
+
+        setIsLogged(canBeLogged);
+        setInputsDisabled(false);
+        navigate("/");
+        return true;
     }
 
     function Loguj(e) {
@@ -69,8 +81,9 @@ const Login = (() => {
                 password: password,
             }).then(async (response) => {
                 resolve(loginSucceed(response.data));
-            }).catch(() => {
-                showError();
+            }).catch((error) => {
+                let errorMessage = error?.response?.data?.error ?? config.errors.serverNotResponding;
+                showError(errorMessage);
                 resolve(false);
             });
         });
@@ -108,11 +121,11 @@ const Login = (() => {
             <main>
                 <div className="loader-div disabled">
                     <span className="loader"></span>
-                    <p>Trwa pobieranie danych z serwera...</p>
+                    <p className="loading-message">Trwa pobieranie danych z serwera...</p>
                 </div>
                 <div className="error-div disabled">
                     <img src={exclaminationCircle} className="error"></img>
-                    <p>Nie udało się pobrać danych z serwera :C</p>
+                    <p className="error-message">Nie udało się pobrać danych z serwera :C</p>
                 </div>
             </main>
             <footer className="login-footer">
