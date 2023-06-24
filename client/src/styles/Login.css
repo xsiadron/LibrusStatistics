@@ -206,6 +206,7 @@ input:disabled {
     height: 100%;
     position: absolute;
     top: 40px;
+    animation: revealAnimation 0.4s forwards;
 }
 
 .loader-div p {
@@ -218,13 +219,15 @@ input:disabled {
     height: 100%;
     position: absolute;
     top: 20px;
+    animation: revealAnimation 0.4s forwards;
 }
 
 .logged-out-div {
     width: 100%;
     height: 100%;
     position: absolute;
-    top: 40px;
+    top: 20px;
+    animation: revealAnimation 0.4s forwards;
 }
 
 .logged-out {
@@ -233,4 +236,15 @@ input:disabled {
     display: inline-block;
     position: relative;
     box-sizing: border-box;
+}
+
+@keyframes revealAnimation {
+    0% {
+        transform: translateY(100px);
+        opacity: 0;
+    }    
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
 }
