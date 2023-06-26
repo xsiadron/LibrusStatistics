@@ -23,7 +23,7 @@ class LibrusApi {
     }
 
     authorize(login, password) {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             let caller = this.caller;
             caller.get(config.urls.login).then(() => {
                 return caller.postForm(config.urls.authorization,
@@ -37,78 +37,94 @@ class LibrusApi {
                 caller.get(config.urls.authorization2FA).then(() => {
                     resolve(true);
                 });
-            }).catch(console.error);
+            }).catch(() => {
+                reject(new Error(config.errors.authorize));
+            });
         });
     }
 
     getAttendances() {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             let caller = this.caller;
             caller.get(config.urls.attendances)
                 .then((response) => {
                     let attendancesData = response.data;
                     resolve(attendancesData);
-                }).catch(console.error);
+                }).catch(() => {
+                    reject(new Error(config.errors.attendances));
+                });
         });
     }
 
     getLessons() {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             let caller = this.caller;
             caller.get(config.urls.lessons).then((response) => {
                 let lessonData = response.data
                 resolve(lessonData);
-            }).catch(console.error);
+            }).catch(() => {
+                reject(new Error(config.errors.lessons));
+            });
         });
     }
 
     getSubjects() {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             let caller = this.caller;
             caller.get(config.urls.subjects).then((response) => {
                 let subjectData = response.data;
                 resolve(subjectData);
-            }).catch(console.error);
+            }).catch(() => {
+                reject(new Error(config.errors.subjects));
+            });
         });
     }
 
     getGrades() {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             let caller = this.caller;
             caller.get(config.urls.grades).then((response) => {
                 let gradesData = response.data;
                 resolve(gradesData);
-            }).catch(console.error);
+            }).catch(() => {
+                reject(new Error(config.errors.grades));
+            });
         });
     }
 
     getGradesCategories() {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             let caller = this.caller;
             caller.get(config.urls.gradesCategories).then((response) => {
                 let gradesCategoriesData = response.data;
                 resolve(gradesCategoriesData);
-            }).catch(console.error);
+            }).catch(() => {
+                reject(new Error(config.errors.gradesCategories));
+            });
         });
     }
 
     getGradesComments() {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             let caller = this.caller;
             caller.get(config.urls.gradesComments).then((response) => {
                 let gradesCommentsData = response.data;
                 resolve(gradesCommentsData);
-            }).catch(console.error);
+            }).catch(() => {
+                reject(new Error(config.errors.gradesComments));
+            });
         });
     }
 
     getLessonsTimetableEntries() {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             let caller = this.caller;
             caller.get(config.urls.lessonsTimetableEntries).then((response) => {
                 let lessonsTimetableEntries = response.data;
                 resolve(lessonsTimetableEntries);
-            }).catch(console.error);
+            }).catch(() => {
+                reject(new Error(config.errors.lessonsTimetableEntries));
+            });
         });
     }
 }

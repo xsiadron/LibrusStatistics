@@ -5,14 +5,16 @@
     position: relative;
     width: clamp(20px, 5vw, 25px);
     height: clamp(20px, 5vw, 25px);
-    background-color: #e9dfdf;
+    background-color: var(--light-grey);
     border-radius: 5px;
     color: #000;
     margin: 2px;
+    animation: GradeAnimation 0.5s linear;
 }
 
 .grade-title {
-    font-size: clamp(12px, 5vw, 15px);
+    font-size: clamp(12px, 3vw, 15px);
+    font-weight: 500;
 }
 
 .grade-weight {
@@ -20,4 +22,17 @@
     right: clamp(1px, 0.2vw, 2px);
     position: absolute;
     font-size: clamp(7px, 0.5vw, 8px);
+    font-weight: 00;
+}
+
+@keyframes GradeAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    
+    1000% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }

@@ -1,5 +1,8 @@
 const config = {};
 
+config.serverHostname = "http://localhost";
+config.serverPort = 4000;
+
 config.attendaceTypes = {
   1: "Nieobecność",
   2: "Spóźnienie",
@@ -10,7 +13,14 @@ config.attendaceTypes = {
   2930: "Obecność online",
 };
 
-config.serverHostname = "http://localhost";
-config.serverPort = 4000;
+config.errors = {
+  unknown: "<b>Nieznany błąd.</b><br/> Spróbuj ponownie lub skontaktuj się z administratorem strony.",
+  serverNotResponding: "<b>Serwer nie odpowiada.</b><br/> Spróbuj ponownie lub skontaktuj się z administratorem strony."
+};
+
+config.messages = {
+  loggedOut: "<b>Zostałeś poprawie wylogowany.</b><br/> Twoje dane nie zostały nigdzie przechowane!",
+  loading: "<b>Trwa pobieranie danych z serwera...</b><br/> Ten proces powinien trwać 2-10 sekund"
+}
 
 module.exports = config;

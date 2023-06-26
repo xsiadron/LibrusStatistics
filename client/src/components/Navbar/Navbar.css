@@ -1,13 +1,51 @@
 .nav {
     display: flex;
+    position: fixed;
     align-items: center;
-    background-color: #10161B;
-    height: 75px;
-    padding: 10px;
+    justify-content: space-between;
+    background-color: var(--dark-blue);
+    top: 0;
+    width: 100%;
+    padding: 20px 0px;
+    z-index: 100;
+    transition: 0.5s all;
+    opacity: 0;
+    animation: loginNavbar 0.5s linear forwards;
+}
+
+@keyframes loginNavbar {
+    0% {
+        transform: translateY(-200px);
+        opacity: 0;
+    }    
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+.nav-placeholder {
+    height: 110px;
+    margin: 5px 0;
+    padding: 20px 0px;
 }
 
 .nav a {
     color: #fff;
     text-decoration: none;
     font-size: clamp(1.2rem, 2vw, 1.5rem);
+    margin: 20px;
+}
+
+.nav .site-logout {
+    width: 30px;
+    height: 30px;
+    background-image: url("../../icons/logout.svg");
+    transition: path 0.2s ease-in-out;
+}
+
+.nav .site-logout:hover,
+.nav .site-logout:active {
+    background-image: url("../../icons/logout-hover.svg");
+    transition: path 0.2s ease-in-out;
 }

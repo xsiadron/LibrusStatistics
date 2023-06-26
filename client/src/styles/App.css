@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
 .app {
   text-align: center;
 }
@@ -10,6 +12,23 @@
 
 body {
   margin: 0;
-  background-color: #13191F;
+  background-color: var(--blue);
   color: var(--light-grey);
+}
+
+button {
+  color: #fff;
+  outline: none;
+  font-size: 14px;
+  border: none;
+  padding: 10px;
+  margin: 2px 5px;
+  border-radius: 5px;
+  background-color: var(--lighter-blue);
+  transition: all 0.2s ease;
+}
+
+button:hover,
+button:disabled {
+  background-color: var(--dark-blue);
 }

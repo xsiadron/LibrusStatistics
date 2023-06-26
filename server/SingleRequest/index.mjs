@@ -1,37 +1,66 @@
 import LibrusApi from "./LibrusApi.js";
 
-export const handler = async (event) => {
-	const { httpMethod, login, password, headers } = event;
+async function downloadData(login, password) {
+	try {
+		let librusApi = new LibrusApi();
 
-	let data = await downloadData(login, password);
+		await librusApi.authorize(login, password);
+		const attendances = await librusApi.getAttendances();
+		const lessons = await librusApi.getLessons();
+		const subjects = await librusApi.getSubjects();
+		const grades = await librusApi.getGrades();
+		const gradesCategories = await librusApi.getGradesCategories();
+		const gradesComments = await librusApi.getGradesComments();
+		const lessonsTimetableEntries = await librusApi.getLessonsTimetableEntries();
 
-	return (data);
+		return {
+			attendancesData: attendances,
+			lessonsData: lessons,
+			subjectsData: subjects,
+			gradesData: grades,
+			gradesCategoriesData: gradesCategories,
+			gradesCommentsData: gradesComments,
+			lessonsTimetableEntriesData: lessonsTimetableEntries
+		};
+	} catch (error) {
+		throw new Error(error);
+	}
 }
 
-async function downloadData(login, password) {
-	let librusApi = new LibrusApi();
-	try {
-		const authorized = await librusApi.authorize(login, password);
-		if (authorized) {
-			const attendances = await librusApi.getAttendances();
-			const lessons = await librusApi.getLessons();
-			const subjects = await librusApi.getSubjects();
-			const grades = await librusApi.getGrades();
-			const gradesCategories = await librusApi.getGradesCategories();
-			const gradesComments = await librusApi.getGradesComments();
-			const lessonsTimetableEntries = await librusApi.getLessonsTimetableEntries();
+export const handler = async (event, context, callback) => {
+	const eventBody = JSON.parse(event.body) || {};
 
-			return {
-				attendancesData: attendances,
-				lessonsData: lessons,
-				subjectsData: subjects,
-				gradesData: grades,
-				gradesCategoriesData: gradesCategories,
-				gradesCommentsData: gradesComments,
-				lessonsTimetableEntriesData: lessonsTimetableEntries
-			};
-		} else throw new Error("Not authorized");
+	const login = eventBody["login"];
+	const password = eventBody["password"];
+
+	try {
+		let data = await downloadData(login, password);
+		const response = {
+			statusCode: 200,
+			body: JSON.stringify(data),
+			headers: {
+				"Access-Control-Allow-Origin": "http://localhost",
+				"Access-Control-Allow-Headers": "Content-Type",
+				"Access-Control-Allow-Methods": "POST",
+				"Access-Control-Expose-Headers": "Content-Type",
+				"Access-Control-Max-Age": "86400",
+				"Access-Control-Allow-Credentials": "true"
+			}
+		};
+		callback(null, response);
 	} catch (error) {
-		return false;
+		const response = {
+			statusCode: 500,
+			body: JSON.stringify({error: error.message}),
+			headers: {
+				"Access-Control-Allow-Origin": "http://localhost",
+				"Access-Control-Allow-Headers": "Content-Type",
+				"Access-Control-Allow-Methods": "POST",
+				"Access-Control-Expose-Headers": "Content-Type",
+				"Access-Control-Max-Age": "86400",
+				"Access-Control-Allow-Credentials": "true"
+			}
+		};
+		callback(null, response);
 	}
 }
