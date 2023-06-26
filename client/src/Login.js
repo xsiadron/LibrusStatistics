@@ -78,16 +78,19 @@ const Login = (() => {
         prepareToLogin();
         return new Promise(async (resolve) => {
             let caller = wrapper(axios.create());
-            caller.post(`${config.serverHostname}:${config.serverPort}/`, {
+            const url = config.serverPort !== "" ? `${config.serverHostname}:${config.serverPort}` : config.serverHostname;
+            caller.post(url, {
                 login: login,
                 password: password,
-            }).then(async (response) => {
+              }).then(async (response) => {
+                if (response.status != 200 || response.data.error) throw new Error(response.data.error);
                 resolve(loginSucceed(response.data));
-            }).catch((error) => {
+              }).catch((error) => {
                 let errorMessage = error?.response?.data?.error ?? config.errors.serverNotResponding;
                 showError(errorMessage);
                 resolve(false);
-            });
+              });
+              
         });
     }
 

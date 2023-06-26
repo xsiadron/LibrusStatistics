@@ -1,8 +1,7 @@
-const axios = require("axios");
+const axios = require('axios');
 const { wrapper } = require('axios-cookiejar-support');
 const { CookieJar } = require('tough-cookie');
-
-const config = require('./config');
+const config = require('./config.js');
 
 class LibrusApi {
     constructor() {

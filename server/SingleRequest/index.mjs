@@ -1,16 +1,5 @@
 import LibrusApi from "./LibrusApi.js";
 
-export const handler = async (event) => {
-	const { httpMethod, login, password, headers } = event;
-
-	try {
-		let data = await downloadData(login, password);
-		return (data);
-	} catch (error) {
-		return { error: error.message };
-	}
-}
-
 async function downloadData(login, password) {
 	try {
 		let librusApi = new LibrusApi();
@@ -34,6 +23,44 @@ async function downloadData(login, password) {
 			lessonsTimetableEntriesData: lessonsTimetableEntries
 		};
 	} catch (error) {
-		throw error;
+		throw new Error(error);
+	}
+}
+
+export const handler = async (event, context, callback) => {
+	const eventBody = JSON.parse(event.body) || {};
+
+	const login = eventBody["login"];
+	const password = eventBody["password"];
+
+	try {
+		let data = await downloadData(login, password);
+		const response = {
+			statusCode: 200,
+			body: JSON.stringify(data),
+			headers: {
+				"Access-Control-Allow-Origin": "http://localhost",
+				"Access-Control-Allow-Headers": "Content-Type",
+				"Access-Control-Allow-Methods": "POST",
+				"Access-Control-Expose-Headers": "Content-Type",
+				"Access-Control-Max-Age": "86400",
+				"Access-Control-Allow-Credentials": "true"
+			}
+		};
+		callback(null, response);
+	} catch (error) {
+		const response = {
+			statusCode: 500,
+			body: JSON.stringify({error: error.message}),
+			headers: {
+				"Access-Control-Allow-Origin": "http://localhost",
+				"Access-Control-Allow-Headers": "Content-Type",
+				"Access-Control-Allow-Methods": "POST",
+				"Access-Control-Expose-Headers": "Content-Type",
+				"Access-Control-Max-Age": "86400",
+				"Access-Control-Allow-Credentials": "true"
+			}
+		};
+		callback(null, response);
 	}
 }
