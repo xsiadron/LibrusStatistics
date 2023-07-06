@@ -3,6 +3,13 @@ const config = {};
 config.hostname = process.env.serverHostname;
 config.port = process.env.serverPort;
 
+config.accessControlAllowOrigin = "http://localhost";
+config.accessControlAllowHeaders = "Content-Type";
+config.accessControlAllowMethods = "POST";
+config.accessControlExposeHeaders = "Content-Type";
+config.accessControlMaxAge = "86400";
+config.accessControlAllowCredentials = "true";
+
 config.urls = {
   home: "https://synergia.librus.pl",
   login: "https://api.librus.pl/OAuth/Authorization?client_id=46&response_type=code&scope=mydata",

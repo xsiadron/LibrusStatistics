@@ -1,7 +1,7 @@
 const config = {};
 
 config.serverHostname = "http://localhost";
-config.serverPort = 4000;
+config.serverPort = "3000";
 
 config.attendaceTypes = {
   1: "Nieobecność",

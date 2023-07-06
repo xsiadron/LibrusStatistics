@@ -39,7 +39,7 @@ export const handler = async (event, context, callback) => {
 			statusCode: 200,
 			body: JSON.stringify(data),
 			headers: {
-				"Access-Control-Allow-Origin": "http://localhost",
+				"Access-Control-Allow-Origin": "localhost",
 				"Access-Control-Allow-Headers": "Content-Type",
 				"Access-Control-Allow-Methods": "POST",
 				"Access-Control-Expose-Headers": "Content-Type",
@@ -50,10 +50,10 @@ export const handler = async (event, context, callback) => {
 		callback(null, response);
 	} catch (error) {
 		const response = {
-			statusCode: 500,
+			statusCode: 401,
 			body: JSON.stringify({error: error.message}),
 			headers: {
-				"Access-Control-Allow-Origin": "http://localhost",
+				"Access-Control-Allow-Origin": "localhost",
 				"Access-Control-Allow-Headers": "Content-Type",
 				"Access-Control-Allow-Methods": "POST",
 				"Access-Control-Expose-Headers": "Content-Type",

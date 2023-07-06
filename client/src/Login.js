@@ -82,15 +82,19 @@ const Login = (() => {
             caller.post(url, {
                 login: login,
                 password: password,
-              }).then(async (response) => {
-                if (response.status != 200 || response.data.error) throw new Error(response.data.error);
+            }).then(async (response) => {
                 resolve(loginSucceed(response.data));
-              }).catch((error) => {
-                let errorMessage = error?.response?.data?.error ?? config.errors.serverNotResponding;
+            }).catch((error) => {
+                let errorMessage = error?.response?.data?.error || config.errors.serverNotResponding;
+                console.log(errorMessage);
+                console.log(errorMessage.startsWith("Error:"));
+                console.log(errorMessage.startsWith("Error: "));
+                // .slice(7) removes unnecessary "Error: " from string of server data response
+                if (errorMessage.startsWith("Error: ")) errorMessage.slice(7);
                 showError(errorMessage);
                 resolve(false);
-              });
-              
+            });
+
         });
     }
 
