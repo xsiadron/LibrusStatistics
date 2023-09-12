@@ -10,7 +10,7 @@
     min-height: var(--subject-card-height);
     text-align: left;
     border-radius: 10px;
-    margin: auto;
+    margin: 0 auto;
     box-shadow: 0px 8px 10px 0px rgba(19, 19, 19, 0.8);
 }
 
@@ -18,7 +18,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     width: 100%;
     height: 100%;
 }

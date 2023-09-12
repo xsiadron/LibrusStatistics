@@ -1,7 +1,7 @@
 const config = {};
 
 config.serverHostname = "http://localhost";
-config.serverPort = "3000";
+config.serverPort = "4000";
 
 config.attendaceTypes = {
   1: "Nieobecność",
@@ -12,6 +12,10 @@ config.attendaceTypes = {
   2928: "Nieobecność online",
   2930: "Obecność online",
 };
+
+config.treatAsAttendance = [
+  2, 100, 2930
+]
 
 config.errors = {
   unknown: "<b>Nieznany błąd.</b><br/> Spróbuj ponownie lub skontaktuj się z administratorem strony.",

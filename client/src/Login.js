@@ -83,14 +83,11 @@ const Login = (() => {
                 login: login,
                 password: password,
             }).then(async (response) => {
+                if (typeof response.data === 'string') throw response.data;
                 resolve(loginSucceed(response.data));
             }).catch((error) => {
-                let errorMessage = error?.response?.data?.error || config.errors.serverNotResponding;
-                console.log(errorMessage);
-                console.log(errorMessage.startsWith("Error:"));
-                console.log(errorMessage.startsWith("Error: "));
-                // .slice(7) removes unnecessary "Error: " from string of server data response
-                if (errorMessage.startsWith("Error: ")) errorMessage.slice(7);
+                let errorMessage = config.errors.serverNotResponding;
+                if (typeof error === 'string') errorMessage = error;
                 showError(errorMessage);
                 resolve(false);
             });

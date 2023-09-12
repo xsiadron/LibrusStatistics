@@ -3,7 +3,7 @@ import "./GradesAveragesSection.css"
 import infoCircleIcon from '../../icons/info-circle.svg';
 
 const GradesAveragesSection = ({ gradesData, semester }) => {
-    if (!gradesData.length > 0) return (
+    if (!gradesData || !gradesData.length > 0) return (
         <div className="grades-averages">
             <img src={infoCircleIcon} alt="informacja" />
             <p>Brak ocen dla tego przedmiotu</p>

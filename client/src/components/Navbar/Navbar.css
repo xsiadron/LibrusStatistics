@@ -13,6 +13,11 @@
     animation: loginNavbar 0.5s linear forwards;
 }
 
+.nav div {
+    display: flex;
+    align-items: center;
+}
+
 @keyframes loginNavbar {
     0% {
         transform: translateY(-200px);
@@ -34,13 +39,14 @@
     color: #fff;
     text-decoration: none;
     font-size: clamp(1.2rem, 2vw, 1.5rem);
-    margin: 20px;
+    margin: 5px;
 }
 
 .nav .site-logout {
     width: 30px;
     height: 30px;
     background-image: url("../../icons/logout.svg");
+    margin-right: 25px;
     transition: path 0.2s ease-in-out;
 }
 
@@ -48,4 +54,10 @@
 .nav .site-logout:active {
     background-image: url("../../icons/logout-hover.svg");
     transition: path 0.2s ease-in-out;
+}
+
+.nav .site-icon {
+    width: 30px;
+    height: 30px;
+    background-image: url("../../icons/LibrusStatisticsLogo.png");
 }

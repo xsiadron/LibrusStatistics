@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import './Navbar.css';
-import logoutIcon from '../../icons/logout.svg';
+import siteIcon from '../../icons/LibrusStatisticsLogo.png';
 import { useContext } from "react"
 import { AuthContext } from '../../AuthContext';
 
@@ -30,7 +30,10 @@ const Navbar = () => {
         <>
             <div className='nav-placeholder'></div>
             <nav className="nav">
-                <a href="/" className="site-title">Librus Statistics</a>
+                <div>
+                    <a href="/"><img src={siteIcon} width={60} height={60}></img></a>
+                    <a href="/" className="site-title">Librus Statistics</a>
+                </div>
                 {isLogged && (
                     <a className="site-logout" onClick={logout}></a>
                 )}

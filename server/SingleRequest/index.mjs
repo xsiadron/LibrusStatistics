@@ -28,39 +28,31 @@ async function downloadData(login, password) {
 }
 
 export const handler = async (event, context, callback) => {
-	const eventBody = JSON.parse(event.body) || {};
-
-	const login = eventBody["login"];
-	const password = eventBody["password"];
+	let userData = {};
+	let login = "";
+	let password = "";
+	if (event && event.body) {
+		userData = JSON.parse(event.body);
+		if (userData.login && userData.password) {
+			login = String(userData.login);
+			password = String(userData.password);
+		}
+	}
 
 	try {
 		let data = await downloadData(login, password);
 		const response = {
 			statusCode: 200,
 			body: JSON.stringify(data),
-			headers: {
-				"Access-Control-Allow-Origin": "localhost",
-				"Access-Control-Allow-Headers": "Content-Type",
-				"Access-Control-Allow-Methods": "POST",
-				"Access-Control-Expose-Headers": "Content-Type",
-				"Access-Control-Max-Age": "86400",
-				"Access-Control-Allow-Credentials": "true"
-			}
+			isBase64Encoded: false
 		};
-		callback(null, response);
+		return response;
 	} catch (error) {
 		const response = {
 			statusCode: 401,
 			body: JSON.stringify({error: error.message}),
-			headers: {
-				"Access-Control-Allow-Origin": "localhost",
-				"Access-Control-Allow-Headers": "Content-Type",
-				"Access-Control-Allow-Methods": "POST",
-				"Access-Control-Expose-Headers": "Content-Type",
-				"Access-Control-Max-Age": "86400",
-				"Access-Control-Allow-Credentials": "true"
-			}
+			isBase64Encoded: false
 		};
-		callback(null, response);
+		return response;
 	}
 }

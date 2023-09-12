@@ -1,9 +1,17 @@
 import CountUp from 'react-countup';
 import "./AttendancesSection.css"
 import ProgressBar from "../ProgressBar/ProgressBar"
+const config = require("../../config/librus-config");
 
 const AttendancesSection = ({ attendancesSummaryData }) => {
-    const attendancePercentage = (attendancesSummaryData["Obecność"] / attendancesSummaryData["Quantity"]) * 100;
+    let attendancePercentage = 0;
+    let attendanceQuantity = 0;
+    if (attendancesSummaryData && attendancesSummaryData["Quantity"]) {
+        config.treatAsAttendance.forEach(treatAttendance => {
+            if (attendancesSummaryData[config.attendaceTypes[treatAttendance]]) attendanceQuantity += attendancesSummaryData[config.attendaceTypes[treatAttendance]];
+        });
+        attendancePercentage = (attendanceQuantity / attendancesSummaryData["Quantity"]) * 100
+    }
 
     function CountUpOrString(end, suffix) {
         if (end == 0 || !parseInt(end)) return "";

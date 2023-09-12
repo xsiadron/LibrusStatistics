@@ -17,7 +17,6 @@ class LibrusStatisticsApi {
             let shortNameData = this.lessonsNames["Short"];
 
             let librusStatisticsData = {};
-
             for (let subjectId in this.lessonsNames["Full"]) {
                 let lessonName = this.getLessonNameBySubjectId(subjectId);
 
@@ -25,13 +24,13 @@ class LibrusStatisticsApi {
                 let grade = gradesData?.[lessonName]?.Grades ?? false;
                 let days = daysData?.[lessonName] ?? false;
 
-                if (attendance && grade && days) {
-                    librusStatisticsData[lessonName] ??= {};
-                    librusStatisticsData[lessonName].Attendances = attendance;
-                    librusStatisticsData[lessonName].Grades = grade;
-                    librusStatisticsData[lessonName].Days = days;
-                    librusStatisticsData[lessonName].Properties = { ShortName: shortNameData[lessonName] };
-                }
+                librusStatisticsData[lessonName] ??= {};
+
+                if (attendance) librusStatisticsData[lessonName].Attendances = attendance; 
+                if (grade) librusStatisticsData[lessonName].Grades = grade;
+                if (days) librusStatisticsData[lessonName].Days = days;
+                if (lessonName) librusStatisticsData[lessonName].Properties = { ShortName: shortNameData[lessonName] };
+                
             }
             return librusStatisticsData;
         } catch (error) {

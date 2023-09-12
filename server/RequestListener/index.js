@@ -1,36 +1,10 @@
-const LibrusApi = require("./LibrusApi");
+const config = require("./config.js");
+const LibrusApi = require("./LibrusApi.js");
 const express = require('express');
 const bodyParser = require('body-parser');
-const config = require("./config");
-
-const hostname = config.hostname;
-const port = config.port;
+const cors = require('cors');
 
 const app = express();
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-app.use(function (req, res, next) {
-	res.setHeader('Access-Control-Allow-Origin', config.accessControlAllowOrigin);
-	res.setHeader('Access-Control-Allow-Headers', config.accessControlAllowHeaders);
-	res.setHeader('Access-Control-Allow-Methods', config.accessControlAllowMethods);
-	res.setHeader('Access-Control-Expose-Headers', config.accessControlExposeHeaders);
-	res.setHeader('Access-Control-Max-Age', config.accessControlMaxAge);
-	res.setHeader('Access-Control-Allow-Credentials', config.accessControlAllowCredentials);
-
-	next();
-});
-
-app.post('/', async function (req, res) {
-	const { login, password } = req.body;
-	try {
-		let data = await downloadData(login, password);
-		res.send(data);
-	} catch (error) {
-		res.status(500).json({ error: error.message });
-	}
-});
 
 async function downloadData(login, password) {
 	try {
@@ -59,6 +33,21 @@ async function downloadData(login, password) {
 	}
 }
 
-app.listen(port, hostname, () => {
-	console.log(`Server running at http://${hostname}:${port}/`);
+app.use(bodyParser.json());
+app.use(cors());
+
+app.post('/', async (req, res) => {
+    const login = req.body.login;
+    const password = req.body.password;
+
+	try {
+		let data = await downloadData(login, password);
+		res.json(data);
+	} catch (error) {
+		res.json(error.message);
+	}
+});
+
+app.listen(config.port, () => {
+    console.log(`Serwer uruchomiony na porcie ${config.port}.`);
 });
