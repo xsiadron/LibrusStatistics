@@ -8,9 +8,9 @@ import GradesAveragesSection from "../GradesAveragesSection/GradesAveragesSectio
 const SubjectCard = ({ name, semester }) => {
     const data = JSON.parse(localStorage.getItem('data')).data;
 
-    let grades = data[name]?.Grades?.semester || {};
+    let grades = data[name]?.Grades?.[semester] || [];
     let days = data[name]?.Days || [];
-    let attendances = data[name]?.Attendances?.Summary?.semester || {};
+    let attendances = data[name]?.Attendances?.Summary?.[semester] || {};
     let properties = data[name]?.Properties || {};
 
     if (semester == 0) { // all semesters
@@ -28,7 +28,7 @@ const SubjectCard = ({ name, semester }) => {
                 }
             }
             return result;
-        }, {});;
+        }, {});
     }
 
 
