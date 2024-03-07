@@ -13,7 +13,7 @@ const SubjectCard = ({ name, semester }) => {
     let attendances = data[name]?.Attendances.Summary[semester];
     let properties = data[name].Properties;
 
-    if (semester == 0) {
+    if (semester == 0) { // all semesters
         let semestersGrades = data[name]?.Grades || [];
         let semestersAttendances = data[name]?.Attendances?.Summary || [];
 

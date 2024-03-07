@@ -30,7 +30,7 @@ const GradesAveragesSection = ({ gradesData, semester }) => {
     }
 
     function calculateAverage(grades) {
-        let filteredGrades = grades.filter((grade) => grade.GradeCountToTheAverage === true);
+        let filteredGrades = grades.filter((grade) => grade.GradeCountToTheAverage === true && gradesTable[grade.Grade] !== 0);
         filteredGrades = filteredGrades.filter((grade) => gradesTable[grade.Grade] != null);
 
         if (filteredGrades.length === 0) return "-";
