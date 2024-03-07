@@ -1,4 +1,4 @@
-import "./DaysBar.css"
+import "./DaysBar.css";
 
 export default function DaysBar({ days }) {
     const daysOfWeek = {
@@ -9,14 +9,22 @@ export default function DaysBar({ days }) {
         5: "pt.",
         6: "sob.",
         7: "niedz.",
-        8: "Nie ma w planie lekcji"
+        8: "Brak w twoim planie",
     };
 
-const uniqueDaysSet = new Set(days);
-const sortedDays = [...uniqueDaysSet].sort((a, b) => a - b);
-const daysString = sortedDays.map(day => daysOfWeek[day]).join("\t");
+    let daysString;
 
-    return (<div className="subject-card-days">
-        <p className="days">{daysString}</p>
-    </div>)
+    if (days && days.length > 0) {
+        const uniqueDaysSet = new Set(days);
+        const sortedDays = [...uniqueDaysSet].sort((a, b) => a - b);
+        daysString = sortedDays.map((day) => daysOfWeek[day]).join("\t");
+    } else {
+        daysString = daysOfWeek[8];
+    }
+
+    return (
+        <div className="subject-card-days">
+            <p className="days">{daysString}</p>
+        </div>
+    );
 }

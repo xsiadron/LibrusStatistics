@@ -8,16 +8,16 @@ import GradesAveragesSection from "../GradesAveragesSection/GradesAveragesSectio
 const SubjectCard = ({ name, semester }) => {
     const data = JSON.parse(localStorage.getItem('data')).data;
 
-    let grades = data[name]?.Grades[semester] || {};
-    let days = data[name]?.Days || [8];
-    let attendances = data[name]?.Attendances.Summary[semester];
-    let properties = data[name].Properties;
+    let grades = data[name]?.Grades?.semester || {};
+    let days = data[name]?.Days || [];
+    let attendances = data[name]?.Attendances?.Summary?.semester || {};
+    let properties = data[name]?.Properties || {};
 
     if (semester == 0) { // all semesters
-        let semestersGrades = data[name]?.Grades || [];
+        let semestersGrades = data[name]?.Grades || {};
         let semestersAttendances = data[name]?.Attendances?.Summary || [];
 
-        grades = Object.values(semestersGrades).reduce((previousData, semesterGrade) => { return previousData.concat(semesterGrade); });
+        grades = Object.values(semestersGrades).reduce((previousData, semesterGrade) => previousData.concat(semesterGrade), []);
 
         attendances = Object.values(semestersAttendances).reduce((result, summary) => {
             for (const key in summary) {

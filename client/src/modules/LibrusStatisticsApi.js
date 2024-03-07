@@ -6,6 +6,7 @@ class LibrusStatisticsApi {
 
     constructor(data) {
         this.data = data;
+        console.log(data);
         this.setLessonsNames();
     }
 
@@ -30,6 +31,12 @@ class LibrusStatisticsApi {
                     librusStatisticsData[lessonName].Attendances = attendance;
                     librusStatisticsData[lessonName].Grades = grade;
                     librusStatisticsData[lessonName].Days = days;
+                    librusStatisticsData[lessonName].Properties = { ShortName: shortNameData[lessonName] };
+                } else {
+                    librusStatisticsData[lessonName] ??= {};
+                    librusStatisticsData[lessonName].Attendances = {};
+                    librusStatisticsData[lessonName].Grades = {};
+                    librusStatisticsData[lessonName].Days = {};
                     librusStatisticsData[lessonName].Properties = { ShortName: shortNameData[lessonName] };
                 }
             }
