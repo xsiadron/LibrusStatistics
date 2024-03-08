@@ -49,8 +49,12 @@ input[type="search"] {
     width: 20vw;
     min-width: 275px;
     margin: 10px;
-    padding: 10px;
+    padding: 15px 20px;
     border-radius: 10px;
+    background-color: var(--lighter-blue);
+    font-size: 15px;
+    color: #fff;
+    border: none;
 }
 
 @keyframes Test {

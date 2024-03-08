@@ -17,7 +17,7 @@ export default function Home() {
             const filteredData = filterData(tempData, showAll, searchValue);
             setData(filteredData);
         }
-    }, [showAll, data]);
+    }, [displayedSemester, buttonIndex, showAll, data]);
 
     const changeSemester = (e) => {
         let semester = e.target.dataset.value;
@@ -69,22 +69,22 @@ export default function Home() {
                     <div className='group'>
                         <h1>{"{"}</h1>
                         <div>
-                            <p>Ustawienia semestralne</p>
-                            <button onClick={changeSemester} data-value="1" className={buttonIndex == 1 ? 'active-button' : ''}>Semestr 1</button>
-                            <button onClick={changeSemester} data-value="2" className={buttonIndex == 2 ? 'active-button' : ''}>Semestr 2</button>
-                            <button onClick={changeSemester} data-value="0" className={buttonIndex == 0 ? 'active-button' : ''}>Wszystkie</button>
+                            <p>Ustawienia zakresu</p>
+                            <button onClick={changeSemester} data-value="1" className={buttonIndex == 1 ? 'active' : ''}>Semestr 1</button>
+                            <button onClick={changeSemester} data-value="2" className={buttonIndex == 2 ? 'active' : ''}>Semestr 2</button>
+                            <button onClick={changeSemester} data-value="0" className={buttonIndex == 0 ? 'active' : ''}>Wszystkie dane</button>
                         </div>
                         <h1>{"}"}</h1>
                     </div>
                     <div className='group'>
                         <h1>{"{"}</h1>
                         <div>
-                            <p>Ustawienia Wyświetlania</p>
+                            <p>Ustawienia wyświetlania</p>
                             <button onClick={changeDisplaySubjectsButton}>Pokaż wszystkie przedmioty</button>
                         </div>
                         <h1>{"}"}</h1>
                     </div>
-                    <input onChange={changeDisplaySubjects} type='search' placeholder='Search by name' />
+                    <input onChange={changeDisplaySubjects} type='search' placeholder='Wyszukaj po nazwie...' />
 
                 </section>
                 <section className="subjects-cards">
