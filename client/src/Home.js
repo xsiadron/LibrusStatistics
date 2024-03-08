@@ -1,13 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import "./styles/Home.css"
 import "./styles/config.css"
 import SubjectCard from "./components/SubjectCard/SubjectCard"
 
 export default function Home() {
-    const [data, setData] = useState(JSON.parse(localStorage.getItem('data')).data);
-
     const [displayedSemester, setDisplayedSemester] = useState(0);
     const [buttonIndex, setButtonIndex] = useState(0)
+    const [showAll, setShowAll] = useState(false)
+
+    const [data, setData] = useState(filterData(JSON.parse(localStorage.getItem('data')).data, showAll, ""));
+
+    useEffect(() => {
+        if (localStorage.getItem('data')) {
+            const searchValue = document.querySelector("input[type='search']").value.toLowerCase();
+            const tempData = JSON.parse(localStorage.getItem('data')).data;
+            const filteredData = filterData(tempData, showAll, searchValue);
+            setData(filteredData);
+        }
+    }, [showAll, data]);
 
     const changeSemester = (e) => {
         let semester = e.target.dataset.value;
@@ -15,24 +25,41 @@ export default function Home() {
         setDisplayedSemester(semester);
     }
 
-    const changeDisplaySubjects = (e) => {
-        if (e.target.classList.contains('active-button')) {
-            e.target.classList.remove('active-button');
+    const changeDisplaySubjectsButton = (e) => {
+        if (!showAll) {
+            e.target.classList.add("active");
+        } else {
+            e.target.classList.remove("active");
+        }
+        setShowAll(!showAll);
+        changeDisplaySubjects(e);
+    }
 
-            let tempData = JSON.parse(localStorage.getItem('data')).data;
-            for (let name in tempData) {
-                if (tempData.hasOwnProperty(name) && JSON.stringify(tempData[name].Days) === '{}') {
-                    delete tempData[name];
+    const changeDisplaySubjects = (e) => {
+        let searchValue = document.querySelector("input[type = 'search']").value.toLowerCase();
+
+        let tempData = JSON.parse(localStorage.getItem('data')).data;
+
+        tempData = filterData(tempData, showAll, searchValue)
+
+        setData(tempData);
+    }
+
+    function filterData(data, bShowAll, searchString) {
+        if (bShowAll) {
+            for (let name in data) {
+                if (!name.toLowerCase().includes(searchString)) {
+                    delete data[name];
                 }
             }
-            setData(tempData);
-
         } else {
-            e.target.classList.add('active-button');
-            let tempData = JSON.parse(localStorage.getItem('data')).data;
-
-            setData(tempData);
+            for (let name in data) {
+                if ((data.hasOwnProperty(name) && JSON.stringify(data[name].Days) === '{}') || !name.toLowerCase().includes(searchString)) {
+                    delete data[name];
+                }
+            }
         }
+        return data;
     }
 
     return (
@@ -53,10 +80,12 @@ export default function Home() {
                         <h1>{"{"}</h1>
                         <div>
                             <p>Ustawienia Wyświetlania</p>
-                            <button onClick={changeDisplaySubjects} className='active-button'>Pokaż wszystkie przedmioty</button>
+                            <button onClick={changeDisplaySubjectsButton}>Pokaż wszystkie przedmioty</button>
                         </div>
                         <h1>{"}"}</h1>
                     </div>
+                    <input onChange={changeDisplaySubjects} type='search' placeholder='Search by name' />
+
                 </section>
                 <section className="subjects-cards">
                     {Object.keys(data).map((subjectKey, index) => {
