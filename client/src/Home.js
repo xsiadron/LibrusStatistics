@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import "./styles/Home.css"
 import "./styles/config.css"
 import SubjectCard from "./components/SubjectCard/SubjectCard"
@@ -8,16 +8,22 @@ export default function Home() {
     const [buttonIndex, setButtonIndex] = useState(0)
     const [showAll, setShowAll] = useState(false)
 
+    const [searchValue, setSearchValue] = useState("");
+    const inputRef = useRef();
+
     const [data, setData] = useState(filterData(JSON.parse(localStorage.getItem('data')).data, showAll, ""));
 
     useEffect(() => {
-        if (localStorage.getItem('data')) {
-            const searchValue = document.querySelector("input[type='search']").value.toLowerCase();
-            const tempData = JSON.parse(localStorage.getItem('data')).data;
-            const filteredData = filterData(tempData, showAll, searchValue);
-            setData(filteredData);
+        if (localStorage.getItem("data")) {
+            const tempData = JSON.parse(localStorage.getItem("data")).data;
+            const newData = filterData(tempData, showAll, searchValue);
+            setData(newData);
         }
-    }, [displayedSemester, buttonIndex, showAll, data]);
+    }, [displayedSemester, buttonIndex, showAll, searchValue]);
+
+    useEffect(() => {
+        setSearchValue(inputRef.current.value.toLowerCase());
+    }, [displayedSemester, buttonIndex, showAll]);
 
     const changeSemester = (e) => {
         let semester = e.target.dataset.value;
@@ -55,7 +61,9 @@ export default function Home() {
         } else {
             for (let name in data) {
                 if ((data.hasOwnProperty(name) && JSON.stringify(data[name].Days) === '{}') || !name.toLowerCase().includes(searchString)) {
-                    delete data[name];
+                    if (!data[name].Properties.ShortName.toLowerCase().includes(searchString)) {
+                        delete data[name];
+                    }
                 }
             }
         }
@@ -84,7 +92,7 @@ export default function Home() {
                         </div>
                         <h1>{"}"}</h1>
                     </div>
-                    <input onChange={changeDisplaySubjects} type='search' placeholder='Wyszukaj po nazwie...' />
+                    <input onChange={changeDisplaySubjects} ref={inputRef} type='search' placeholder='Wyszukaj po nazwie...' />
 
                 </section>
                 <section className="subjects-cards">
