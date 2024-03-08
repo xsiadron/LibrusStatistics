@@ -4,7 +4,8 @@ import "./styles/config.css"
 import SubjectCard from "./components/SubjectCard/SubjectCard"
 
 export default function Home() {
-    const [displayedSemester, setDisplayedSemester] = useState(0);
+    const [displayedSemester, setDisplayedSemester] = useState(localStorage.getItem("semester") || 0);
+
     const [buttonIndex, setButtonIndex] = useState(0)
     const [showAll, setShowAll] = useState(false)
 
@@ -14,12 +15,17 @@ export default function Home() {
     const [data, setData] = useState(filterData(JSON.parse(localStorage.getItem('data')).data, showAll, ""));
 
     useEffect(() => {
+        setButtonIndex(displayedSemester);
+        setDisplayedSemester(displayedSemester);
+      }, []);
+
+    useEffect(() => {
         if (localStorage.getItem("data")) {
             const tempData = JSON.parse(localStorage.getItem("data")).data;
             const newData = filterData(tempData, showAll, searchValue);
             setData(newData);
         }
-    }, [displayedSemester, buttonIndex, showAll, searchValue]);
+    }, [buttonIndex, showAll, searchValue]);
 
     useEffect(() => {
         setSearchValue(inputRef.current.value.toLowerCase());

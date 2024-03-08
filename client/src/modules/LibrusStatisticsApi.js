@@ -6,14 +6,30 @@ class LibrusStatisticsApi {
 
     constructor(data) {
         this.data = data;
-        console.log(data);
+
+        localStorage.setItem("semester", this.getActualSemester());
         this.setLessonsNames();
+    }
+
+    getActualSemester() {
+        const classData = this.data.classesData.Class;
+        const now = new Date();
+
+        const firstSemesterStart = new Date(classData.BeginSchoolYear) ?? now;
+        const firstSemesterEnd = new Date(classData.EndFirstSemester) ?? now;
+        const secondSemesterStart = firstSemesterEnd;
+        const secondSemesterEnd = new Date(classData.EndSchoolYear) ?? now;
+
+        if (secondSemesterEnd < now) return 0;
+        else if (secondSemesterStart < now) return 2;
+        else if (firstSemesterStart < now) return 1;
+
+        return 0;
     }
 
     async convertData() {
         try {
             let attendancesData = await this.getAttendancesData();
-            console.log("Data to:" + attendancesData);
             let gradesData = await this.getGradesData();
             let daysData = await this.getLessonsDaysData();
             let shortNameData = this.lessonsNames["Short"];
