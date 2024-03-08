@@ -60,7 +60,6 @@ export default function Home() {
           }
         } else {
           for (let name in data) {
-            console.log(data[name].Properties.ShortName.toLowerCase().includes(searchString));
             if (
               (data.hasOwnProperty(name) && JSON.stringify(data[name].Days) === '{}') ||
               !name.toLowerCase().includes(searchString) &&
