@@ -42,6 +42,7 @@ async function downloadData(login, password) {
 		const gradesCategories = await librusApi.getGradesCategories();
 		const gradesComments = await librusApi.getGradesComments();
 		const lessonsTimetableEntries = await librusApi.getLessonsTimetableEntries();
+		const classes = await librusApi.getClasses();
 
 		return {
 			attendancesData: attendances,
@@ -50,7 +51,8 @@ async function downloadData(login, password) {
 			gradesData: grades,
 			gradesCategoriesData: gradesCategories,
 			gradesCommentsData: gradesComments,
-			lessonsTimetableEntriesData: lessonsTimetableEntries
+			lessonsTimetableEntriesData: lessonsTimetableEntries,
+			classesData: classes
 		};
 	} catch (error) {
 		throw error;

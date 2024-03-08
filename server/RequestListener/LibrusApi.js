@@ -127,6 +127,18 @@ class LibrusApi {
             });
         });
     }
+
+    getClasses() {
+        return new Promise((resolve, reject) => {
+            let caller = this.caller;
+            caller.get(config.urls.classes).then((response) => {
+                let classes = response.data;
+                resolve(classes);
+            }).catch(() => {
+                reject(new Error(config.errors.classes));
+            });
+        });
+    }
 }
 
 module.exports = LibrusApi;
