@@ -30,18 +30,35 @@
     padding: 20px 0px;
 }
 
-.nav a {
-    color: #fff;
-    text-decoration: none;
-    font-size: clamp(1.2rem, 2vw, 1.5rem);
-    margin: 20px;
-}
-
 .nav .site-logout {
     width: 30px;
     height: 30px;
+    margin: 20px;
     background-image: url("../../icons/logout.svg");
     transition: path 0.2s ease-in-out;
+}
+
+.site-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+}
+
+.site-title img {
+    margin: 2px;
+}
+
+.site-title.sub {
+    font-size: 15px !important;
+}
+
+.title-links-section {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
 }
 
 .nav .site-logout:hover,
