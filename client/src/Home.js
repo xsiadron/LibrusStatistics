@@ -53,22 +53,25 @@ export default function Home() {
 
     function filterData(data, bShowAll, searchString) {
         if (bShowAll) {
-            for (let name in data) {
-                if (!name.toLowerCase().includes(searchString)) {
-                    delete data[name];
-                }
+          for (let name in data) {
+            if (!name.toLowerCase().includes(searchString) && !data[name].Properties.ShortName.toLowerCase().includes(searchString)) {
+              delete data[name];
             }
+          }
         } else {
-            for (let name in data) {
-                if ((data.hasOwnProperty(name) && JSON.stringify(data[name].Days) === '{}') || !name.toLowerCase().includes(searchString)) {
-                    if (!data[name].Properties.ShortName.toLowerCase().includes(searchString)) {
-                        delete data[name];
-                    }
-                }
+          for (let name in data) {
+            console.log(data[name].Properties.ShortName.toLowerCase().includes(searchString));
+            if (
+              (data.hasOwnProperty(name) && JSON.stringify(data[name].Days) === '{}') ||
+              !name.toLowerCase().includes(searchString) &&
+              !data[name].Properties.ShortName.toLowerCase().includes(searchString)
+            ) {
+              delete data[name];
             }
+          }
         }
         return data;
-    }
+      }
 
     return (
         <>
