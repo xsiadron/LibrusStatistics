@@ -13,6 +13,7 @@ class LibrusStatisticsApi {
     async convertData() {
         try {
             let attendancesData = await this.getAttendancesData();
+            console.log("Data to:" + attendancesData);
             let gradesData = await this.getGradesData();
             let daysData = await this.getLessonsDaysData();
             let shortNameData = this.lessonsNames["Short"];
@@ -26,19 +27,11 @@ class LibrusStatisticsApi {
                 let grade = gradesData?.[lessonName]?.Grades ?? false;
                 let days = daysData?.[lessonName] ?? false;
 
-                if (attendance && grade && days) {
-                    librusStatisticsData[lessonName] ??= {};
-                    librusStatisticsData[lessonName].Attendances = attendance;
-                    librusStatisticsData[lessonName].Grades = grade;
-                    librusStatisticsData[lessonName].Days = days;
-                    librusStatisticsData[lessonName].Properties = { ShortName: shortNameData[lessonName] };
-                } else {
-                    librusStatisticsData[lessonName] ??= {};
-                    librusStatisticsData[lessonName].Attendances = {};
-                    librusStatisticsData[lessonName].Grades = {};
-                    librusStatisticsData[lessonName].Days = {};
-                    librusStatisticsData[lessonName].Properties = { ShortName: shortNameData[lessonName] };
-                }
+                librusStatisticsData[lessonName] = librusStatisticsData[lessonName] ?? {};
+                librusStatisticsData[lessonName].Attendances = attendance || {};
+                librusStatisticsData[lessonName].Grades = grade || {};
+                librusStatisticsData[lessonName].Days = days || {};
+                librusStatisticsData[lessonName].Properties = { ShortName: shortNameData[lessonName] } || {};
             }
             return librusStatisticsData;
         } catch (error) {
