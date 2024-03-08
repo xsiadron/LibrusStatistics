@@ -1,6 +1,6 @@
 const config = {};
 
-config.serverHostname = "http://localhost";
+config.serverHostname = "http://192.168.1.108";
 config.serverPort = 4000;
 
 config.attendaceTypes = {

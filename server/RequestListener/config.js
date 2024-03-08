@@ -1,6 +1,6 @@
 const config = {};
 
-config.hostname = "localhost";
+config.hostname = "192.168.1.108";
 config.port = 4000;
 
 config.urls = {

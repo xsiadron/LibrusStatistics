@@ -12,6 +12,17 @@
     display: flex;
     justify-content: start;
     align-items: center;
+    margin: 10px;
+}
+
+.sub-nav .group {
+    display: flex;
+    height: 100%;
+    padding: 10px;
+}
+
+.sub-nav p  {
+    margin: 10px;
 }
 
 .sub-nav button {
@@ -44,5 +55,15 @@
     100% {
         transform: translateY(0px);
         opacity: 1;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .sub-nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        margin: 10px;
     }
 }
