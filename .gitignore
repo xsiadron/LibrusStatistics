@@ -168,5 +168,3 @@ dist
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-server/RequestListener/config.js
-server/RequestListener/config.js

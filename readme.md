@@ -25,27 +25,28 @@ git clone https://github.com/xsiadron/LibrusStatistics
 
 ### 3. Install packages in client & server
 ```s
-cd LibrusStatistics/LibrusStatistics/client/
+cd LibrusStatistics/client/
 npm install
 ```
 ```s
-cd LibrusStatistics/LibrusStatistics/server/RequestListener
+cd ../server/RequestListener
 npm install
 ```
 
 ### 4. Setup client config & server config
 ```s
-code LibrusStatistics/LibrusStatistics/client/src/config/librus-config.js
-code LibrusStatistics/LibrusStatistics/server/RequestListener/config.js
+cd ../../
+code client/src/config/librus-config.js
+code server/RequestListener/config.js
 ```
 
 ### 5. Run & Have Fun!
 ```s
-cd LibrusStatistics/LibrusStatistics/client/
+cd client/
 npm run start
 ```
 ```s
-cd LibrusStatistics/LibrusStatistics/server/RequestListener
+cd ../server/RequestListener
 npm run start
 ```
 
