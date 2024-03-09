@@ -1,6 +1,6 @@
 import CountUp from 'react-countup';
 import "./GradesAveragesSection.css"
-import infoCircleIcon from '../../icons/info-circle.svg';
+import infoCircleIcon from '../../icons/info-circle.png';
 
 const GradesAveragesSection = ({ gradesData, semester }) => {
     if (!gradesData.length > 0) return (

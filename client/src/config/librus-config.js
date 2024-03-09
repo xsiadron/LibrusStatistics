@@ -1,7 +1,7 @@
 const config = {};
 
-config.serverHostname = "http://192.168.1.108";
-config.serverPort = 4000;
+config.serverHostname = "";
+config.serverPort = 0;
 
 config.attendaceTypes = {
   1: "Nieobecność",
@@ -14,8 +14,8 @@ config.attendaceTypes = {
 };
 
 config.errors = {
-  unknown: "<b>Nieznany błąd.</b><br/> Spróbuj ponownie lub skontaktuj się z administratorem strony.",
-  serverNotResponding: "<b>Serwer nie odpowiada.</b><br/> Odczekaj i spróbuj ponownie lub skontaktuj się z administratorem strony."
+  unknown: "<b>Nieznany błąd.</b><br/> Spróbuj ponownie lub skontaktuj się z administratorem strony.<br/>(lukasz.frydrych@xsiadron.com)",
+  serverNotResponding: "<b>Serwer nie odpowiada.</b><br/> Odczekaj i spróbuj ponownie lub skontaktuj się z administratorem strony.<br/>(lukasz.frydrych@xsiadron.com)"
 };
 
 config.messages = {

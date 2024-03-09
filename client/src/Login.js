@@ -6,8 +6,8 @@ import ReactHtmlParser from "react-html-parser"
 import "./styles/Login.css"
 import { AuthContext } from "./AuthContext";
 import LibrusStatisticsApi from "./modules/LibrusStatisticsApi"
-import infoCircleIcon from './icons/info-circle.svg';
-import exclaminationCircleIcon from './icons/exclamination-circle.svg';
+import infoCircleIcon from './icons/info-circle.png';
+import exclaminationCircleIcon from './icons/exclamination-circle.png';
 import loggedOutIcon from './icons/logged-out.svg';
 
 import config from "./config/librus-config"

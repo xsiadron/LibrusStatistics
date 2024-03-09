@@ -49,14 +49,18 @@
 
 .site-title img {
     margin: 2px;
+    opacity: 0.8;
 }
 
 .site-title div {
-    opacity: 0.75;
+    opacity: 0.9;
 }
 
-.site-title.sub {
-    font-size: 15px !important;
+small {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
     opacity: 0.75;
 }
 
