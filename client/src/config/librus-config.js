@@ -15,12 +15,12 @@ config.attendaceTypes = {
 
 config.errors = {
   unknown: "<b>Nieznany błąd.</b><br/> Spróbuj ponownie lub skontaktuj się z administratorem strony.",
-  serverNotResponding: "<b>Serwer nie odpowiada.</b><br/> Spróbuj ponownie lub skontaktuj się z administratorem strony."
+  serverNotResponding: "<b>Serwer nie odpowiada.</b><br/> Odczekaj i spróbuj ponownie lub skontaktuj się z administratorem strony."
 };
 
 config.messages = {
-  loggedOut: "<b>Zostałeś poprawie wylogowany.</b><br/> Twoje dane nie zostały nigdzie przechowane!",
-  loading: "<b>Trwa pobieranie danych z serwera...</b><br/> Ten proces powinien trwać 2-10 sekund"
+  loggedOut: "<b>Zostałeś wylogowany.</b><br/> Twoje wszelkie dane z tej sesji zostały skasowane.<br/>Do zobaczenia!",
+  loading: "<b>Trwa pobieranie danych z serwera...</b><br/> Ten proces nie potrwa dłużej niż 2-10 sekund."
 }
 
 module.exports = config;

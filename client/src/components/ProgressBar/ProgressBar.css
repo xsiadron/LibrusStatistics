@@ -11,14 +11,15 @@
 }
 
 .progress-bar .progress {
-    animation: ProgressBarAnimation 1s ease-in-out forwards;
+    animation: ProgressBarAnimation 0.75s ease-in-out forwards;
 } 
 
 .progress-bar-title {
     font-family: 'Roboto', sans-serif;
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 800;
     color: #000;
+    opacity: 0.75;
     z-index: 1;
 }
 

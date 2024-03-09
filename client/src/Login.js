@@ -82,15 +82,15 @@ const Login = (() => {
             caller.post(url, {
                 login: login,
                 password: password,
-              }).then(async (response) => {
+            }).then(async (response) => {
                 if (response.status != 200 || response.data.error) throw new Error(response.data.error);
                 resolve(loginSucceed(response.data));
-              }).catch((error) => {
+            }).catch((error) => {
                 let errorMessage = error?.response?.data?.error ?? config.errors.serverNotResponding;
                 showError(errorMessage);
                 resolve(false);
-              });
-              
+            });
+
         });
     }
 
@@ -148,9 +148,12 @@ const Login = (() => {
                 </div>
             </main>
             <footer className="login-footer">
-                <img src={infoCircleIcon} alt="informacja" />
+                <img src={infoCircleIcon} alt="informacja" height={25} />
                 &nbsp;
-                <p>Nie przechowujemy żadnych danych osobistych na serwerze po zalogowaniu. Twój login i hasło są bezpieczne.</p>
+                <p>
+                    Twoje dane nie zostaną przechowane na dłużej niż czas sesji. Twój login i hasło są bezpieczne.<br/>
+                    (Strona nie powinna, lecz może zawierać błędy, weź to pod uwagę przy korzystaniu z serwisu.)
+                </p>
                 <button onClick={closeFooter}>X</button>
             </footer>
         </section>

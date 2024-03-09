@@ -114,7 +114,7 @@ select:-webkit-autofill {
     left: 2%;
     width: 96%;
     z-index: 100;
-    padding: 10px;
+    padding: 20px 10px;
     transition: 0.5s all;
     animation: footerInitialization 0.8s linear forwards;
 }
@@ -130,7 +130,8 @@ select:-webkit-autofill {
 
 .login-footer p {
     font-size: clamp(14px, 2vw, 16px);
-    margin-right: 40px;
+    margin-right: 20px;
+    margin-left: 2px;
 }
 
 .login-footer button {

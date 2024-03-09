@@ -27,7 +27,7 @@ const ProgressBar = ({ percentage }) => {
 
     return (<div className="progress-bar">
         <span className="progress-bar-title">
-            <CountUp end={percentage} duration={0.8} suffix="%" easingFn={(t, b, c, d) => c * t / d + b} />
+            <CountUp end={percentage} duration={0.5} suffix="%" easingFn={(t, b, c, d) => c * t / d + b} />
         </span>
         <div style={progressStyle} className="progress">
         </div>
