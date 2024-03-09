@@ -14,9 +14,12 @@ Librus Statistics gets data from [portal.librus.pl/rodzina](https://portal.libru
 Visit [ls.xsiadron.com](https://ls.xsiadron.com) and log in getting real data, or if you don't have one, use the available preview displaying sample data.
 
 ## Install on your own
-If you are terrified of providing data on my site, you can always run your own instance of such an application having full open-source access to it.
+If you are terrified of providing data on my site, you can always run your own instance of such an application having full open-source access to it.  The following steps do not necessarily guarantee a launch when applied accurately. Some things need to be changed.
 
 ### 1. Make sure to have latest version of Node.js
+
+> [!NOTE]
+> The requirement to get started is at least a basic understanding of React and servers and having the software to run them. Don't try if you don't know what you're doing
 
 ### 2. Clone LibrusStatistics repository
 ```s
@@ -51,8 +54,8 @@ npm run start
 ```
 
 
-> ### Important!
-> - I am not responsible for any errors that occur, risks or any problems related to the code and its launch.
+> [!IMPORTANT]
+> I am not responsible for any errors that occur, risks or any problems related to the code and its launch.
 
 
 ## Feedback
@@ -64,5 +67,5 @@ Thank you!
 
 ## Authors
 
-- [@xsiadron](https://www.github.com/xsiadron)
+- [@xsiadron](https://www.github.com/xsiadron), see [xsiadron.com](https://www.xsiadron.com)
 
