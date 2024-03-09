@@ -35,6 +35,7 @@
     border-radius: 5px;
     background-color: var(--lighter-blue);
     transition: all 0.1s ease;
+    cursor: pointer;
 }
 
 .sub-nav button:active {

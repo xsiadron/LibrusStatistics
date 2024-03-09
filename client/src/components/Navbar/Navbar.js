@@ -4,9 +4,12 @@ import logoutIcon from '../../icons/logout.svg';
 import librusStatisticsIcon from '../../icons/LibrusStatisticsIcon.png';
 import { useContext } from "react"
 import { AuthContext } from '../../AuthContext';
+import { sampleData } from "../../modules/SampleData"
 
 const Navbar = () => {
     const { isLogged, setIsLogged } = useContext(AuthContext);
+
+    console.log(sampleData);
 
     const navigate = useNavigate();
 
@@ -27,6 +30,14 @@ const Navbar = () => {
         setIsLogged(false);
     }
 
+    function previewData() {
+        const minutesToExpire = 15;
+        const validSampleData = JSON.stringify({ data: sampleData, expireDate: Date.now() + minutesToExpire * 60 * 1000 })
+        localStorage.setItem("data", validSampleData);
+        localStorage.setItem("semester", 0);
+        setIsLogged(true);
+    }
+
     return (
         <>
             <div className='nav-placeholder'></div>
@@ -40,6 +51,9 @@ const Navbar = () => {
                         </div>
                     </a>
                 </div>
+                {!isLogged && (
+                    <a className="site-preview-data" onClick={previewData}>Uruchom wersję podglądową</a>
+                )}
                 {isLogged && (
                     <a className="site-logout" onClick={logout}></a>
                 )}

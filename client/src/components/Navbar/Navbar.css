@@ -36,6 +36,15 @@
     margin: 20px;
     background-image: url("../../icons/logout.svg");
     transition: path 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.nav .site-preview-data {
+    margin: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--darkest-blue);
+    cursor: pointer;
 }
 
 .site-title {
