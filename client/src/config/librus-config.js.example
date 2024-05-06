@@ -1,0 +1,25 @@
+const config = {};
+
+config.hostnames = [];
+
+config.attendaceTypes = {
+  1: "Nieobecność",
+  2: "Spóźnienie",
+  3: "Nieobecność usprawiedliwiona",
+  4: "Zwolnienie",
+  100: "Obecność",
+  2928: "Nieobecność online",
+  2930: "Obecność online",
+};
+
+config.errors = {
+  unknown: "<b>Nieznany błąd.</b><br/> Spróbuj ponownie lub skontaktuj się z administratorem strony.<br/>",
+  serverNotResponding: "<b>Serwer nie odpowiada.</b><br/> Odczekaj i spróbuj ponownie lub skontaktuj się z administratorem strony.<br/>"
+};
+
+config.messages = {
+  loggedOut: "<b>Zostałeś wylogowany.</b><br/> Twoje wszelkie dane z tej sesji zostały skasowane.",
+  loading: "<b>Trwa pobieranie danych z serwera...</b>"
+}
+
+module.exports = config;
