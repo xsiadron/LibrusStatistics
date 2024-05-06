@@ -76,23 +76,43 @@ const Login = (() => {
     function Loguj(e) {
         e.preventDefault();
         prepareToLogin();
-        return new Promise(async (resolve) => {
-            let caller = wrapper(axios.create());
-            const url = config.serverPort !== "" ? `${config.serverHostname}:${config.serverPort}` : config.serverHostname;
-            caller.post(url, {
-                login: login,
-                password: password,
-            }).then(async (response) => {
-                if (response.status != 200 || response.data.error) throw new Error(response.data.error);
-                resolve(loginSucceed(response.data));
-            }).catch((error) => {
-                let errorMessage = error?.response?.data?.error ?? config.errors.serverNotResponding;
-                showError(errorMessage);
-                resolve(false);
-            });
 
+        return new Promise((resolve) => {
+            let loggedSuccessfully = false;
+            let lastErrorMessage = "Error";
+
+            const logInAttempt = (hostname) => {
+                let caller = wrapper(axios.create());
+                let url = hostname;
+                return caller.post(url, {
+                    login: login,
+                    password: password,
+                });
+            };
+
+            const attemptLogin = async (hostnames) => {
+                for (const hostname of hostnames) {
+                    try {
+                        const response = await logInAttempt(hostname);
+                        if (response.status !== 200 || response.data.error) {
+                            throw new Error(response.data.error);
+                        }
+                        loggedSuccessfully = loginSucceed(response.data);
+                        if (loggedSuccessfully) resolve(true);
+                        return;
+                    } catch (error) {
+                        lastErrorMessage = error?.response?.data?.error ?? config.errors.serverNotResponding;
+                    }
+                }
+                if (!loggedSuccessfully) showError(lastErrorMessage);
+                resolve(loggedSuccessfully);
+            };
+
+            attemptLogin(config.hostnames);
         });
     }
+
+
 
     const loggedOut = localStorage.getItem("logged-out");
     useEffect(() => {
@@ -151,7 +171,7 @@ const Login = (() => {
                 <img src={infoCircleIcon} alt="informacja" height={25} />
                 &nbsp;
                 <p>
-                    Twoje dane nie zostaną przechowane na dłużej niż czas sesji. Twój login i hasło są bezpieczne.<br/>
+                    Twoje dane nie zostaną przechowane na dłużej niż czas sesji. Twój login i hasło są bezpieczne.<br />
                     (Strona nie powinna, lecz może zawierać błędy, weź to pod uwagę przy korzystaniu z serwisu.)
                 </p>
                 <button onClick={closeFooter}>X</button>
