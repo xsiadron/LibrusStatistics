@@ -14,6 +14,7 @@ class LibrusApi {
             axios.create({
                 jar: this.cookie,
                 withCredentials: true,
+                timeout: 15000,
                 headers: {
                     "User-Agent":
                         "User-Agent:Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36",
