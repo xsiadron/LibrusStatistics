@@ -1,7 +1,10 @@
 const config = {};
 
-config.hostname = "";
-config.port = 0;
+config.hostname = "localhost";
+config.port = 3000;
+
+config.privateKey = '/etc/letsencrypt/live/';
+config.certificate = '/etc/letsencrypt/live/';
 
 config.urls = {
   home: "https://synergia.librus.pl",
