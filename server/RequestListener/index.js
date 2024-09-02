@@ -1,3 +1,5 @@
+const fs = require('fs');
+const https = require('https');
 const LibrusApi = require("./LibrusApi");
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -59,6 +61,14 @@ async function downloadData(login, password) {
 	}
 }
 
-app.listen(port, hostname, () => {
+const privateKey = fs.readFileSync(config.privateKey, 'utf8');
+const certificate = fs.readFileSync(config.certificate, 'utf8');
+
+const options = {
+	key: privateKey,
+	cert: certificate,
+}
+
+https.createServer(options, app).listen(port, hostname, () => {
 	console.log(`Server running at http://${hostname}:${port}/`);
-});
+})
