@@ -3,8 +3,8 @@ const config = {};
 config.hostname = "localhost";
 config.port = 3000;
 
-config.privateKey = '/etc/letsencrypt/live/';
-config.certificate = '/etc/letsencrypt/live/';
+config.privateKey = ''; // empty = no key, common linux location is /etc/letsencrypt/live/
+config.certificate = ''; // empty = no certificate, common linux location is /etc/letsencrypt/live/
 
 config.urls = {
   home: "https://synergia.librus.pl",

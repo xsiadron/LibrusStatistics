@@ -61,13 +61,22 @@ async function downloadData(login, password) {
 	}
 }
 
-const privateKey = fs.readFileSync(config.privateKey, 'utf8');
-const certificate = fs.readFileSync(config.certificate, 'utf8');
+let options = {};
 
-const options = {
-	key: privateKey,
-	cert: certificate,
-}
+if (
+	config.privateKey &&
+	config.certificate &&
+	config.privateKey != "" &&
+	config.certificate != ""
+  ) {
+	const privateKey = fs.readFileSync(config.privateKey, "utf8");
+	const certificate = fs.readFileSync(config.certificate, "utf8");
+  
+	options = {
+	  key: privateKey,
+	  cert: certificate,
+	};
+  }
 
 https.createServer(options, app).listen(port, hostname, () => {
 	console.log(`Server running at http://${hostname}:${port}/`);
